@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-app = Flask(__name__)\
+app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -16,5 +16,4 @@ def arscene():
 
 @app.route('/upload')
 def upload():
-    return render_template('upload.html', h1='Artwork upload',
-                           title='TEED | Artwork upload', upload=True)
+    return render_template('upload.html')
