@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-     <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <meta charset="UTF-8">
@@ -29,7 +30,8 @@
           smoothThreshold="5"
         >
             <a-entity geometry="primitive:box;"
-                      material="shader:gif;src:url({{ url_for('static', filename='ar/test/sg.gif')}});color:green;opacity:.8">
+                      material="shader:gif;src:url({{ url_for('static', filename='ar/test/sg.gif')}});color:green;opacity:.8"
+                      position="0 1 -1>
             </a-entity>
     </a-nft>
 <a-entity camera></a-entity>
