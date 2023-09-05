@@ -22,15 +22,16 @@
 
         <a-nft
           type="nft"
-          url="{{ url_for('static', filename='ar/test/oda') }}"
+          url="{{ url_for('static', filename='ar/test/odal1') }}"
           smooth="true"
           smoothCount="10"
           smoothTolerance=".01"
           smoothThreshold="5"
         >
             <a-entity geometry="primitive:box;"
-                      material="color:green;opacity:.8"
-                      position="0 1 -1">
+                      material="color:green;opacity:1"
+                      position="0 0 .1"
+                      scale="200 200 200">
             </a-entity>
     </a-nft>
 <a-entity camera></a-entity>
