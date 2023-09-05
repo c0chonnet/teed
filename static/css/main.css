@@ -103,13 +103,6 @@ h1, h2 {
 }
 
 
-
-.camera {
-   width:90%
-   margin : 0px;
-   overflow: hidden;
-}
-
 .content {
     padding: 1em 1em 3em;
 }
@@ -166,7 +159,7 @@ a.pure-button-primary {
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
-    z-index: 3;
+    z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -181,7 +174,12 @@ a.pure-button-primary {
   iframe {margin : 0px;
   overflow: hidden;
   height: 100%;
-  position:absolute;}
+  position:absolute;
+}
+
+    a-scene {
+     z-index: 1;
+    }
 
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --

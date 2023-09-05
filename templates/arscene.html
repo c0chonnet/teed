@@ -3,16 +3,20 @@
 <head>
     <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <meta charset="UTF-8">
     <title>scene</title>
 </head>
-<body>
-     <a-scene
-                vr-mode-ui="enabled: false;"
-                renderer="logarithmicDepthBuffer: true;"
-                embedded
-                arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
-     >
-     </a-scene>
+<body style="margin : 0px; overflow: hidden; width:100%">
+        <div class="arjs-loader">
+            <div>Loading, please wait...</div>
+        </div>
+         <a-scene
+                    vr-mode-ui="enabled: false;"
+                    renderer="logarithmicDepthBuffer: true;"
+                    embedded
+                    arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+         </a-scene>
 </body>
 </html>
