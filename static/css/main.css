@@ -152,25 +152,6 @@ a.pure-button-primary {
     z-index: 100;
 }
 
-.arjs-loader {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .arjs-loader div {
-    text-align: center;
-    font-size: 1.25em;
-    color: white;
-  }
-
   iframe {margin : 0px;
   overflow: hidden;
   height: 100%;

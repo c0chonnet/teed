@@ -1,40 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image-aframe.prod.js"></script>
     <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <meta charset="UTF-8">
     <title>scene</title>
 </head>
-<body style="margin : 0px; overflow: hidden; width:100%">
-        <div class="arjs-loader">
-            <div>Find a picture to interact with...</div>
-        </div>
-         <a-scene
-                    vr-mode-ui="enabled: false;"
-                    device-orientation-permission-ui="enabled: false"
-                    renderer="logarithmicDepthBuffer: true;"
-                    embedded
-                    arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+<body>
+      <a-scene mindar-image="imageTargetSrc: {{ url_for('static', filename='ar/test/targets.mind') }};"
+               vr-mode-ui="enabled: false"
+               device-orientation-permission-ui="enabled: false">
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-        <a-nft
-          type="nft"
-          url="{{ url_for('static', filename='ar/test/odal1') }}"
-          smooth="true"
-          smoothCount="10"
-          smoothTolerance=".01"
-          smoothThreshold="5"
-        >
-            <a-entity geometry="primitive:box;"
-                      material="color:green;opacity:1"
-                      position="0 0 .1"
-                      scale="200 200 200">
-            </a-entity>
-    </a-nft>
-<a-entity camera></a-entity>
-  </a-scene>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-entity geometry="primitive:box;" material="shader:gif;src:url({{ url_for('static', filename='ar/test/sg.gif') }});transparent:true;"></a-entity>
+      </a-entity>
+
+    </a-scene>
 </body>
 </html>
