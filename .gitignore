@@ -2,3 +2,4 @@
 /venv/
 /.flaskenv
 /node_modules/
+/.env

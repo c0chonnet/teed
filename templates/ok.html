@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link href="https://fonts.cdnfonts.com/css/highway-gothic" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Success</title>
+</head>
+<body>
+     <div class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+            <a class="pure-menu-heading" href="/upload">Artist's page</a>
+        </div>
+    </div>
+
+     <div style="position:absolute; top:10%;color:black;padding:50px 50px 100px 50px;">
+         <h1 style="color:black;font-family:sans-serif">The changes have been applied</h1>
+            <form action="/upload">
+                <button type="submit" class="pure-button">Back to editing</button>
+            </form>
+
+         </div>
+    <div class="footer l-box is-center">
+        TEED exhibition app. Test environment.
+    </div>
+</body>
+</html>

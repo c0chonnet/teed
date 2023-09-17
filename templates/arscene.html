@@ -11,9 +11,11 @@
     <title>scene</title>
 </head>
 <body>
+
       <a-scene mindar-image="imageTargetSrc: {{ url_for('static', filename='ar/test/targets.mind') }};"
                vr-mode-ui="enabled: false"
                device-orientation-permission-ui="enabled: false">
+
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
@@ -21,5 +23,6 @@
       </a-entity>
 
     </a-scene>
+
 </body>
 </html>
