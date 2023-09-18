@@ -53,28 +53,96 @@ def upload():
     with Tunneling() as t:
         with t.engine.connect() as connection:
             artists = connection.execute(sql.text('SELECT * FROM artists;'))
-    return render_template('upload.html', artists=artists)
-@app.route('/upload_artwork', methods=['POST','GET'])
-def upload_artwork():
+            artworks= connection.execute(sql.text('''SELECT artworks.id, artworks.name, artists.name AS aname
+                                                   FROM artworks JOIN artists ON artists.id = artworks.artist_id;'''))
+    return render_template('upload.html', artists=artists, artworks=artworks)
+
+
+@app.route('/preview')
+def preview( methods=['GET']):
+    ids = request.args.get('id')
+    ext = request.args.get('ext')
+    return render_template('preview.html', id=ids, ext=ext)
+
+@app.route('/delete_artwork', methods=['POST','GET'])
+def delete_artwork():
     with Tunneling() as t:
         with t.engine.connect() as connection:
-            query = sql.text('''INSERT INTO artworks(artist_id, name, lon, lat, street, building) 
-                     VALUES (:artist,:artwork_name,:lon,:lat,:street,:bld) RETURNING id''')
+            query = sql.text('DELETE FROM assets WHERE artwork_id = :id;')
+            query = query.bindparams(id=request.form['deleteartwork'])
+            connection.execute(query)
+            query = sql.text('DELETE FROM artworks WHERE id = :id;')
+            query = query.bindparams(id=request.form['deleteartwork'])
+            connection.execute(query)
+            connection.commit()
+
+    for root, dirs, files in os.walk(os.environ['UPLOAD_FOLDER']):
+        for file in files:
+            if file.rsplit('.', 1)[0].lower() == str(request.form['deleteartwork']):
+                os.remove(os.path.join(root, file))
+    return render_template('ok.html')
+
+
+
+@app.route('/upload_artwork', methods=['POST','GET'])
+def upload_artwork():
+
+    target = request.files['target']
+    if target.filename == '':
+        istarget = False
+    else:
+        istarget = True
+
+    sound = request.files['sound']
+    if sound.filename == '':
+        issound = False
+    else:
+        issound = True
+
+    with Tunneling() as t:
+        with t.engine.connect() as connection:
+
+            query = sql.text('''INSERT INTO artworks(artist_id, name, lon, lat, street, building, preview) 
+                     VALUES (:artist,:artwork_name,:lon,:lat,:street,:bld, :trg) RETURNING id''')
             query = query.bindparams(artist=request.form['artist'],
                                                        artwork_name=request.form['artwork-name'],
                                                        lon=request.form['lon'],
                                                        lat=request.form['lat'],
                                                        street=request.form['street'],
-                                                       bld=request.form['bld'])
+                                                       bld=request.form['bld'],
+                                                       trg=istarget)
             result = connection.execute(query).fetchone()
             lastid=result.id
+
+            query = sql.text('''INSERT INTO assets(artwork_id, type, sound, credits) 
+                                 VALUES (:a_id,:as_type,:sound,:credits)''')
+            query = query.bindparams(a_id=lastid,
+                                     as_type=request.form['assettype'],
+                                     sound=issound,
+                                     credits=request.form['credits'])
+            connection.execute(query)
             connection.commit()
 
-            files = request.files
+        files = request.files
 
-            if files['picture'].filename.rsplit('.', 1)[1].lower() in ['jpg', 'jpeg']:
-                ext = files['picture'].filename.rsplit('.', 1)[1].lower()
-                files['picture'].save(os.path.join(os.environ['UPLOAD_FOLDER'], 'pic', str(lastid) + '.' + ext))
+        if files['picture'].filename.rsplit('.', 1)[1].lower() == 'jpg':
+            files['picture'].save(os.path.join(os.environ['UPLOAD_FOLDER'], 'pic', str(lastid) + '.jpg'))
 
-    return render_template('ok.html')
+        if files['asset'].filename.rsplit('.', 1)[1].lower() in ['glb', 'gif', 'png', 'txt', 'jpg']:
+            ext = files['asset'].filename.rsplit('.', 1)[1].lower()
+            files['asset'].save(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', str(lastid) + '.' + ext))
+
+        if istarget == True:
+            files['target'].save(os.path.join(os.environ['UPLOAD_FOLDER'], str(lastid) + '.mind'))
+
+        if issound == True:
+            files['sound'].save(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', str(lastid) + '.mp3'))
+
+    qr = url_for('preview', id=lastid,
+                 ext=files['asset'].filename.rsplit('.', 1)[1].lower(),
+                 _external=True)
+    return render_template('ok.html', preview=istarget,
+                           lastid=str(lastid),
+                           qr=qr,
+                           artworkname=request.form['artwork-name'])
 
