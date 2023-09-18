@@ -22,14 +22,14 @@ else:
 
 class Tunneling:
     def __enter__(self):
-        if os.environ['LOCAL'] == True:
+        if os.environ['LOCAL'] == 'True':
             self.engine = engine1
         else:
             tunnel.start()
             self.engine = create_engine((os.environ['LOCALDB'] + str(tunnel.local_bind_port) + '/teed'), echo=True)
         return self
     def __exit__(self, exc_type, exc_val, exc_tb):
-        if os.environ['LOCAL'] == True:
+        if os.environ['LOCAL'] == 'True':
             pass
         else:
             tunnel.close()
