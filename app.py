@@ -6,21 +6,19 @@ from dotenv import load_dotenv
 
 app = Flask(__name__)
 
-load_dotenv()
-sshtunnel.SSH_TIMEOUT = 5.0
-sshtunnel.TUNNEL_TIMEOUT = 5.0
-tunnel = sshtunnel.SSHTunnelForwarder(
-            (os.environ['PA_SSH'], 22),
-            ssh_username=os.environ['PA_USER'],
-            ssh_password=os.environ['PA_PWD'],
-            remote_bind_address=(os.environ['RBA_HOST'], int(os.environ['RBA_PORT']))
-            )
-
-if os.environ['LOCAL'] == True:
+if os.environ['LOCAL'] == 'True':
     SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
     engine1 = create_engine(SQLALCHEMY_DATABASE_URI, echo=True)
 else:
-    pass
+    load_dotenv()
+    sshtunnel.SSH_TIMEOUT = 5.0
+    sshtunnel.TUNNEL_TIMEOUT = 5.0
+    tunnel = sshtunnel.SSHTunnelForwarder(
+        (os.environ['PA_SSH'], 22),
+        ssh_username=os.environ['PA_USER'],
+        ssh_password=os.environ['PA_PWD'],
+        remote_bind_address=(os.environ['RBA_HOST'], int(os.environ['RBA_PORT']))
+    )
 
 class Tunneling:
     def __enter__(self):
