@@ -60,7 +60,16 @@ def upload():
 def preview( methods=['GET']):
     ids = request.args.get('id')
     ext = request.args.get('ext')
-    return render_template('preview.html', id=ids, ext=ext)
+
+    if ext == 'txt':
+        with open(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', str(ids) + '.txt'), "r") as f:
+            text = "\n".join(f.read().splitlines())
+
+    if os.path.exists(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', str(ids) + '.mp3')):
+        sound = os.path.join(os.environ['UPLOAD_FOLDER'],
+                                              'assets', str(ids) + '.mp3')
+
+    return render_template('preview.html', id=ids, ext=ext, text=text, sound=sound)
 
 @app.route('/delete_artwork', methods=['POST','GET'])
 def delete_artwork():
