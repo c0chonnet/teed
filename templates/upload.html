@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
     <link href="https://fonts.cdnfonts.com/css/highway-gothic" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static',  filename='favicon.ico')}}">
     <title>Artist's page</title>
 </head>
 <body>
@@ -49,7 +50,7 @@
 
                 <label for="picture">Picture</label>
                 <input type="file" id="picture" name="picture" accept=".jpg" required/>
-                <span class="pure-form-message-inline">.JPG file with an artwork which will be used for tracking and for a preview on a final map</span>
+                <span class="pure-form-message-inline">.JPG file with an artwork which will be used for tracking  and for a preview on a final map</span>
 
                 <h2>2. Assets</h2>
 
@@ -85,25 +86,24 @@
                 <button type="submit" class="pure-button">Submit artwork</button>
          </form>
              </div>
-         <div class="pure-u-2-6"><p></p></div>
+         <div class="pure-u-2-6"  style="border-right:10px solid #dfd821;"><p> </p></div>
          <div class="pure-u-1-6" style="margin:50px;">
-         <h1>Delete artwork</h1>
-             <form  class="pure-form pure-form-stacked" action="/delete_artwork" method="post" style="border-top:10px solid #dfd821;">
+             <h1>Request a change</h1>
+             <form  class="pure-form pure-form-stacked" action="/request_change" method="post" style="border-top:10px solid #dfd821;">
                  <fieldset>
 
-                    <span class="pure-form-message-inline">This will delete all artwork data including assets!
-                    Don't select anything in this field, if you don't need to delete anything</span>
-
-
-                     <select id="deleteartwork" name="deleteartwork" required>
+                     <select id="changeartwork" name="changeartwork" required>
                          <option disabled selected value> -- select an artwork -- </option>
                         {% for a in artworks %}
                         <option value="{{ a.id }}">{{ a.id|string + ': ' + a.name + ' by ' + a.aname}}</option>
                         {% endfor %}
                     </select>
-                      <span class="pure-form-message-inline">Please check if you've selected right!</span>
+                     <label for="requestchange">What should be changed</label>
+                    <input type="text" id="requestchange" name="requestchange" placeholder="Move the asset lower etc."/>
+                    <span class="pure-form-message-inline">Request a change in asset (for example, make smaller, move upper etc)</span>
 
-                     <button type="submit" class="pure-button">Delete</button>  <button type="reset" class="pure-button">Reset</button>
+                     <button type="submit" class="pure-button">Request</button>
+                     <button type="reset" class="pure-button">Reset</button>
                  </fieldset>
              </form>
 

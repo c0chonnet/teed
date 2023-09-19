@@ -8,6 +8,7 @@
     <link href="https://fonts.cdnfonts.com/css/highway-gothic" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <script src="{{ url_for('static', filename='scripts/qrcode.min.js') }}"></script>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static',  filename='favicon.ico')}}">
     <title>All good</title>
 </head>
 <body>
@@ -24,7 +25,7 @@
              <p>In case of requesting any improvements for the piece please let us know it's ID and name:
              <b>{{ lastid }}</b> {{ artworkname }}
              </p>
-             <p>If you've uploaded .mind file, you can always preview your piece at vaenaton.pythonanywhere.com/ + <b>?id=id&ext=ext</b> where id is id of your work and ext is an extention of your asset file</p>
+             <p>If you've uploaded .mind file, you can always preview your piece at vaenaton.pythonanywhere.com/preview + <b>?id=id&ext=ext</b> where id is id of your work and ext is an extention of your asset file</p>
              {% endif %}
             <form action="/upload">
                 <button type="submit" class="pure-button">Back to editing</button>
