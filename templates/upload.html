@@ -4,12 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-    <link href="https://fonts.cdnfonts.com/css/highway-gothic" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static',  filename='favicon.ico')}}">
-    <title>Artist's page</title>
+    <title>TEED | Artist's page</title>
 </head>
 <body>
      <div class="header">
@@ -22,7 +20,7 @@
          <div class="pure-u-2-6">
          <h1 >Artwork upload</h1>
          <h2>1. Artwork information</h2>
-         <form  class="pure-form pure-form-stacked" enctype="multipart/form-data" action="/upload_artwork" method="post">
+         <form  class="pure-form pure-form-stacked l-box" enctype="multipart/form-data" action="/upload_artwork" method="post">
             <fieldset>
                 <label for="artist">Artist</label>
                     <select id="artist" name="artist" required>

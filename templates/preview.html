@@ -31,15 +31,16 @@
         </a-assets>
 
            <a-entity mindar-image-target="targetIndex: 0">
-                <a-gltf-model rotation="0 0 0 " position="0 -0.25 0"  src="#a" animation-mixer>
+                <a-gltf-model rotation="0 0 0 " position="0 -0.25 0"  src="#a" animation-mixer></a-gltf-model>
            </a-entity>
+
           {% elif ext == 'txt' %}
 
           <a-entity mindar-image-target="targetIndex: 0" text="value: {{ text }} ;" ></a-entity>
 
           {% elif ext == 'png' %}
           <a-entity mindar-image-target="targetIndex: 0">
-              <a-image src="src:url({{ url_for('static', filename='ar/assets/'+ id + '.png')}})">
+              <a-image src="src:url({{ url_for('static', filename='ar/assets/'+ id + '.png')}})"></a-image>
           </a-entity>
           {% endif %}
 

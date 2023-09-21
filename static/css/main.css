@@ -101,7 +101,7 @@ h6 {
 
 
 .content {
-    padding: 1em 1em 3em;
+    padding: 30px 50px;
 }
 
 .content-head {
@@ -181,6 +181,25 @@ input[type=file]::file-selector-button {
      z-index: 1;
     }
 
+   .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+        }
+
+        .social-icons i {
+            font-size: 20px; /* Adjust the icon size as needed */
+            margin: 0 5px; /* Add space between icons */
+            color: #3a3a2a;
+        }
+
+ .artistpic {
+ background: #dfd821;
+ margin: 0 50px;
+ position:relative;
+ }
 
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
