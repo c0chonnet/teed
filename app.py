@@ -63,7 +63,7 @@ def preview( methods=['GET']):
 
     text = None
     if ext == 'txt':
-        with open(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', str(ids) + '.txt'), "r") as f:
+        with open(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', str(ids) + '.txt'), "r", encoding='utf-8') as f:
             text = "\n".join(f.read().splitlines())
 
     sound = None
