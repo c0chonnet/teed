@@ -36,7 +36,7 @@
 
           {% elif ext == 'txt' %}
 
-          <a-entity mindar-image-target="targetIndex: 0" text="value: {{ text }} ;" ></a-entity>
+          <a-entity mindar-image-target="targetIndex: 0" text="value: {{ text }} ; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}" ></a-entity>
 
           {% elif ext == 'png' %}
           <a-entity mindar-image-target="targetIndex: 0">
