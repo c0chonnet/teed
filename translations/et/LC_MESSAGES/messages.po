@@ -1,0 +1,50 @@
+# Estonian translations for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-09-25 00:07+0300\n"
+"PO-Revision-Date: 2023-09-25 00:08+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: et\n"
+"Language-Team: et <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: app.py:36
+msgid "Home test"
+msgstr "Kodu test"
+
+#: app.py:41
+msgid "Exhibition"
+msgstr "Näitus"
+
+#: templates/base.html:25 templates/index.html:41
+msgid "About"
+msgstr "Näitusest"
+
+#: templates/index.html:8
+msgid ""
+"Interactive exhibition about Tartu. Read the instructions in the gallery "
+"or below and press \"Start\""
+msgstr "Tartu linna teemaline interaktiivne näitus. Loe juhiseid galeriis või kerides allapoole, seejärel vajuta nuppu \"Alusta\""
+
+#: templates/index.html:12
+msgid "Start"
+msgstr "Alusta"
+
+#: templates/index.html:20
+msgid "How to interact with artworks"
+msgstr "Kuidas teostega suhelda"
+
+#: templates/index.html:49
+msgid "Participants"
+msgstr "Osalejad"
+

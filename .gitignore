@@ -2,3 +2,6 @@
 /venv/
 /.flaskenv
 /node_modules/
+/babel.cfg
+/config.py
+/messages.pot
