@@ -99,6 +99,13 @@ def upload():
                                                    FROM artworks JOIN artists ON artists.id = artworks.artist_id;'''))
       return render_template('upload.html', artists=artists, artworks=artworks)
 
+# Blueprint
+app.register_blueprint(multilingual)
+
+# Babel
+babel = Babel(app)
+
+
 
 def get_locale():
     if not g.get('lang_code', None):
