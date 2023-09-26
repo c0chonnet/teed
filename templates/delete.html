@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+    <link href="https://fonts.cdnfonts.com/css/highway-gothic" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Delete</title>
+</head>
+<body>
+     <div class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+            <a class="pure-menu-heading" href="/upload">Artist's page</a>
+        </div>
+    </div>
+
+     <div style="position:absolute; top:10%;color:black;padding:50px 50px 100px 50px;" class="pure-g">
+         <div class="pure-u-3-6">
+         <h1>Delete artwork</h1>
+             <form  class="pure-form pure-form-stacked" action="/delete_artwork" method="post" style="border-top:10px solid #ff6666;">
+                 <fieldset>
+
+                <select   id="deleteartwork" name="deleteartwork" required>
+                         <option disabled selected value> -- select an artwork -- </option>
+                        {% for a in artworks %}
+                        <option value="{{ a.id }}">{{ a.id|string + ': ' + a.name + ' by ' + a.aname}}</option>
+                        {% endfor %}
+                    </select>
+
+                      <span class="pure-form-message-inline">This will delete all artwork data including assets! Please check if you've selected right!<br><br></span>
+
+                     <button type="submit" class="pure-button" style="background-color:#ff6666;">Delete</button>  <button type="reset" class="pure-button" style="background-color:#ff6666;">Reset</button>
+                 </fieldset>
+             </form>
+
+             </div>
+         </div>
+    <div class="footer l-box is-center">
+        TEED exhibition app. Test environment.
+    </div>
+</body>
+</html>

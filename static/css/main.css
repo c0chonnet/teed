@@ -1,18 +1,17 @@
 body {
     line-height: 1.7em;
-    color: #7f8c8d;
+    color: #3a3a2a;
     font-size: 13px;
+    font-family:'Roboto', sans-serif;
 }
 
 h1,
+h2,
+h3,
 h4,
 h5,
 h6 {
-    color: white;
-}
-
-h1, h2 {
-    font-family: 'Highway Gothic', sans-serif;
+    color: #3a3a2a;
 }
 
 .l-box {
@@ -30,7 +29,7 @@ h1, h2 {
     box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
 }
 .home-menu {
-    background: #0089cb;
+    background: #dfd821;
 }
 .pure-menu.pure-menu-fixed {
     border-bottom: none;
@@ -38,34 +37,33 @@ h1, h2 {
 }
 
 .home-menu .pure-menu-heading {
-    color: white;
     font-weight: 400;
     font-size: 120%;
 }
 
 .home-menu .pure-menu-selected a {
-    color: white;
+    color: #1f1f19;
 }
 
 .home-menu a {
-    color: #6FBEF3;
+    color: #1f1f19;
 }
 .home-menu li a:hover,
 .home-menu li a:focus {
     background: none;
     border: none;
-    color: #AECFE5;
+    color: #1f1f19;
 }
 
 .splash-container {
-    background: #0089cb;
+    background: #dfd821;
     z-index: 1;
     overflow: hidden;
     width: 100%;
-    height: 88%;
+    height: 60%;
     top: 0;
     left: 0;
-    position: fixed !important;
+    position: absolute;
 }
 
 .splash {
@@ -73,21 +71,21 @@ h1, h2 {
     width: 50%;
     margin: auto;
     position: absolute;
-    top: 50px; left: 0; bottom: 0; right: 0;
+    top: 40px; left: 0; bottom: 20px; right: 0;
     text-align: center;
 }
 
 .splash-head {
     font-size: 20px;
     font-weight: bold;
-    color: white;
+    color: #3a3a2a;
     padding: 0.5em 1em;
     border-radius: 5px;
     text-transform: uppercase;
 }
 
 .splash-subhead {
-    color: white;
+    color: #3a3a2a;
     letter-spacing: 0.05em;
     opacity: 0.8;
 }
@@ -104,7 +102,7 @@ h1, h2 {
 
 
 .content {
-    padding: 1em 1em 3em;
+    padding: 30px 50px;
 }
 
 .content-head {
@@ -119,7 +117,7 @@ h1, h2 {
 }
 
 .content-subhead {
-    color: #1f8dd6;
+    color: #1f1f19;
 }
     .content-subhead i {
         margin-right: 7px;
@@ -131,18 +129,40 @@ h1, h2 {
 }
 
 .pure-button {
-    background-color: #1f8dd6;
-    color: white;
-    padding: 0.5em 2em;
+    background-color: #dfd821;
+    color: #3a3a2a;
+    font-size: 110%;
+    padding: 10px 20px;
     border-radius: 5px;
+    margin: 0 auto;
 }
 
-a.pure-button-primary {
-    background: white;
-    color: #1f8dd6;
-    border-radius: 5px;
-    font-size: 120%;
+a.pure-button {
+    background-color: #white;
 }
+
+input {
+ max-width: 100%;
+ width: 350px;
+}
+input[type=file] {
+  color: #444;
+  padding: 5px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #555;
+}
+input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #dfd821;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #3a3a2a;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+}
+
 
 .footer {
     background: #111;
@@ -161,6 +181,32 @@ a.pure-button-primary {
     a-scene {
      z-index: 1;
     }
+
+   .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+        }
+
+        .social-icons i {
+            font-size: 20px;
+            margin: 0 3px;
+            color: #3a3a2a;
+        }
+
+ .artistpic {
+ background: #dfd821;
+ width:80px;
+ height:80px;
+ vertical-align: middle;
+ }
+
+.artisttext {
+padding:15px;
+vertical-align: middle;
+}
 
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
@@ -196,8 +242,6 @@ a.pure-button-primary {
     .splash-head {
         font-size: 400%;
     }
-
-
 
     /* We remove the border-separator assigned to .l-box-lrg */
     .l-box-lrg {

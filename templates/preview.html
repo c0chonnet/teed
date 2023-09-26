@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+    <script src="{{ url_for('static', filename='scripts/aframe-gif-shader.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <meta charset="UTF-8">
+     <link rel="icon" type="image/x-icon" href="{{ url_for('static',  filename='favicon.ico')}}">
+    <title>preview</title>
+</head>
+<body>
+
+      <a-scene mindar-image="imageTargetSrc: {{ url_for('static', filename='ar/'+ id + '.mind') }};"
+               vr-mode-ui="enabled: false"
+               device-orientation-permission-ui="enabled: false">
+
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+          {% if ext == 'gif'%}
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/'+ id + '.gif') }});alphaTest:0.5;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+      </a-entity>
+          {% elif ext == 'glb' %}
+          <a-assets>
+              <a-asset-item id="a" src="{{ url_for('static', filename='ar/assets/'+ id + '.glb') }}"></a-asset-item>
+        </a-assets>
+
+           <a-entity mindar-image-target="targetIndex: 0" >
+                <a-gltf-model rotation="0 0 0 " position="0 -0.28 0"  src="#a" animation-mixer></a-gltf-model>
+           </a-entity>
+
+          {% elif ext == 'txt' %}
+
+          <a-entity mindar-image-target="targetIndex: 0" text="value: {{ text }} ; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}" ></a-entity>
+
+          {% elif ext == 'png' %}
+          <a-entity mindar-image-target="targetIndex: 0">
+              <a-image src="src:url({{ url_for('static', filename='ar/assets/'+ id + '.png')}})"></a-image>
+          </a-entity>
+          {% endif %}
+
+    </a-scene>
+
+</body>
+</html>
