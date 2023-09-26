@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,20 +23,25 @@
         </div>
     </div>
 
+{% block content %}
     <div class="splash-container">
         <div class="splash">
             <h1 class="splash-head">TEED test</h1>
             <p class="splash-subhead">
-                Interactive exhibition about Tartu. Read the instructions in the gallery or below and press "Start"
+                {{ _('Interactive exhibition about Tartu. Read the instructions in the gallery or below and press "Start"') }}
             </p>
             <p>
-                <a href="/visit" class="pure-button">Start</a>
+                <a href="{{ url_for('multilingual.visit') }}" class="pure-button pure-button-primary">
+                    {{ _('Start') }}
+                </a>
             </p>
         </div>
     </div>
     <div class="content-wrapper">
         <div class="content">
-            <h2 class="content-head is-center">How to interact with artworks</h2>
+            <h2 class="content-head is-center">
+                {{ _('How to interact with artworks') }}
+            </h2>
             <div class="pure-g">
                 <div class="pure-u-1 pure-u-md-1-3">
                     <p class="l-box">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -53,14 +59,20 @@
                 </div>
            </div>
 
-            <div class="l-box">
-            <h2 class="content-head is-center " id="about">About</h2>
+            <div class="l-box" id="about">
+            <h2 class="content-head is-center ">
+                {{ _('About') }}
+            </h2>
+
                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                     consequat. Duis aute irure dolor.
                    </p>
-                <h2 class="content-head is-center ">Participants</h2>
+            <h2 class="content-head is-center ">
+                {{ _('Participants') }}
+            </h2>
+               
 
                 <div class="artist1 pure-g">
                     <div class="artistpic pure-u-1-5">
@@ -77,6 +89,7 @@
 
 
                  </div>
+
                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -116,12 +129,5 @@
             </div>
             </div>
         </div>
-    <div class="footer l-box is-center">
-        TEED exhibition app. Test environment.
     </div>
-        </div>
-
-
-
-</body>
-</html>
+{% endblock %}

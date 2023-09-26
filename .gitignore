@@ -2,4 +2,6 @@
 /venv/
 /.flaskenv
 /node_modules/
+/babel.cfg
+/messages.pot
 /.env
