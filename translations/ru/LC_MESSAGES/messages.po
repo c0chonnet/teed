@@ -43,7 +43,7 @@ msgstr "Старт"
 
 #: templates/index.html:20
 msgid "How to interact with artworks"
-msgstr "Как взаимодействовать с произведениями искусства"
+msgstr "Инструкция по посещению выставки"
 
 #: templates/index.html:49
 msgid "Participants"

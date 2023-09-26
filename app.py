@@ -2,6 +2,7 @@
 from flask import Flask, render_template, Blueprint, g, redirect, request, current_app, abort, url_for
 from flask_babel import Babel, _
 import os
+from config import Config
 from sqlalchemy import create_engine, MetaData, Table, sql
 import sshtunnel
 from dotenv import load_dotenv
@@ -12,6 +13,9 @@ from dotenv import load_dotenv
 multilingual = Blueprint('multilingual', __name__, template_folder='templates', url_prefix='/<lang_code>')
 
 app = Flask(__name__)
+app.config.from_object(Config)
+# Babel
+babel = Babel(app)
 
 @multilingual.url_defaults
 def add_language_code(endpoint, values):
@@ -25,7 +29,7 @@ def pull_lang_code(endpoint, values):
 
 @multilingual.before_request
 def before_request():
-    if g.lang_code not in current_app.config['LANGUAGES']:
+    if g.lang_code not in app.config['LANGUAGES']:
         adapter = app.url_map.bind('')
         try:
             endpoint, args = adapter.match('/en' + request.full_path.rstrip('/ ?'))
@@ -36,7 +40,8 @@ def before_request():
     if 'lang_code' in dfl:
         if dfl['lang_code'] != request.full_path.split('/')[1]:
             abort(404)
-            
+
+
 ########## DB ####################
 
 if os.environ['LOCAL'] == 'True':
@@ -92,14 +97,7 @@ def upload():
             artists = connection.execute(sql.text('SELECT * FROM artists;'))
             artworks = connection.execute(sql.text('''SELECT artworks.id, artworks.name, artists.name AS aname
                                                    FROM artworks JOIN artists ON artists.id = artworks.artist_id;'''))
-    return render_template('upload.html', artists=artists, artworks=artworks)
-
-
-# Blueprint
-app.register_blueprint(multilingual)
-
-# Babel
-babel = Babel(app)
+      return render_template('upload.html', artists=artists, artworks=artworks)
 
 
 def get_locale():
@@ -109,6 +107,7 @@ def get_locale():
 
 
 babel.init_app(app, locale_selector=get_locale)
+app.register_blueprint(multilingual)
 
 
 @app.route('/')
