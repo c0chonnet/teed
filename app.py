@@ -92,7 +92,7 @@ def upload():
             artists = connection.execute(sql.text('SELECT * FROM artists;'))
             artworks = connection.execute(sql.text('''SELECT artworks.id, artworks.name, artists.name AS aname
                                                    FROM artworks JOIN artists ON artists.id = artworks.artist_id;'''))
-    return render_template('upload.html', artists=artists, artworks=artworks)
+      return render_template('upload.html', artists=artists, artworks=artworks)
 
 
 # Blueprint
