@@ -7,40 +7,8 @@ from sqlalchemy import create_engine, MetaData, Table, sql
 import sshtunnel
 from dotenv import load_dotenv
 
-
-####################### MULTILANG ############################
-
-multilingual = Blueprint('multilingual', __name__, template_folder='templates', url_prefix='/<lang_code>')
-
 app = Flask(__name__)
 app.config.from_object(Config)
-# Babel
-babel = Babel(app)
-
-@multilingual.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault('lang_code', g.lang_code)
-
-
-@multilingual.url_value_preprocessor
-def pull_lang_code(endpoint, values):
-    g.lang_code = values.pop('lang_code')
-
-
-@multilingual.before_request
-def before_request():
-    if g.lang_code not in app.config['LANGUAGES']:
-        adapter = app.url_map.bind('')
-        try:
-            endpoint, args = adapter.match('/en' + request.full_path.rstrip('/ ?'))
-            return redirect(url_for(endpoint, **args), 301)
-        except:
-            abort(404)
-    dfl = request.url_rule.defaults
-    if 'lang_code' in dfl:
-        if dfl['lang_code'] != request.full_path.split('/')[1]:
-            abort(404)
-
 
 ########## DB ####################
 
@@ -75,6 +43,38 @@ class Tunneling:
 ############
 
 
+
+####################### MULTILANG ############################
+
+multilingual = Blueprint('multilingual', __name__, template_folder='templates', url_prefix='/<lang_code>')
+
+# Babel
+babel = Babel(app)
+
+@multilingual.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', g.lang_code)
+
+
+@multilingual.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.lang_code = values.pop('lang_code')
+
+
+@multilingual.before_request
+def before_request():
+    if g.lang_code not in app.config['LANGUAGES']:
+        adapter = app.url_map.bind('')
+        try:
+            endpoint, args = adapter.match('/en' + request.full_path.rstrip('/ ?'))
+            return redirect(url_for(endpoint, **args), 301)
+        except:
+            abort(404)
+    dfl = request.url_rule.defaults
+    if 'lang_code' in dfl:
+        if dfl['lang_code'] != request.full_path.split('/')[1]:
+            abort(404)
+
 @multilingual.route('/')
 def index():
     return render_template('index.html', title=_('Home test'))
@@ -99,8 +99,6 @@ def upload():
                                                    FROM artworks JOIN artists ON artists.id = artworks.artist_id;'''))
       return render_template('upload.html', artists=artists, artworks=artworks)
 
-# Blueprint
-app.register_blueprint(multilingual)
 
 # Babel
 babel = Babel(app)
