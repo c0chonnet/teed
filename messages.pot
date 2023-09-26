@@ -1,0 +1,35 @@
+
+msgid ""
+msgstr ""
+
+
+#: app.py:36
+msgid "Home test"
+msgstr ""
+
+#: app.py:41
+msgid "Exhibition"
+msgstr ""
+
+#: templates/base.html:25 templates/index.html:41
+msgid "About"
+msgstr ""
+
+#: templates/index.html:8
+msgid ""
+"Interactive exhibition about Tartu. Read the instructions in the gallery "
+"or below and press \"Start\""
+msgstr ""
+
+#: templates/index.html:12
+msgid "Start"
+msgstr ""
+
+#: templates/index.html:20
+msgid "How to interact with artworks"
+msgstr ""
+
+#: templates/index.html:49
+msgid "Participants"
+msgstr ""
+
