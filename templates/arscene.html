@@ -8,20 +8,37 @@
     <script src="{{ url_for('static', filename='scripts/aframe-gif-shader.js') }}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+     <script src="{{ url_for('static', filename='scripts/visit.js') }}"></script>
     <meta charset="UTF-8">
     <title>scene</title>
 </head>
 <body>
 
-      <a-scene mindar-image="imageTargetSrc: {{ url_for('static', filename='ar/test/targets.mind') }};"
+      <a-scene mindar-image="imageTargetSrc: {{ url_for('static', filename='ar/test.mind') }};"
                vr-mode-ui="enabled: false"
                device-orientation-permission-ui="enabled: false">
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/test/sg.gif') }});alphaTest:0.5;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+
+      <a-entity id="77" mindar-image-target="targetIndex: 0" text="value: {{ text }} ; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}" >
       </a-entity>
+
+      <a-entity id="84" mindar-image-target="targetIndex: 1">
+        <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/84.gif') }});alphaTest:0.5;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+      </a-entity>
+
+      <a-entity id="85" mindar-image-target="targetIndex: 2">
+        <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/85.gif') }});alphaTest:0.5;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+      </a-entity>
+
+          <a-assets>
+              <a-asset-item id="a" src="{{ url_for('static', filename='ar/assets/89.glb') }}"></a-asset-item>
+        </a-assets>
+
+          <a-entity id="89" mindar-image-target="targetIndex: 3" >
+                <a-gltf-model rotation="0 0 0 " position="0 -0.27 0"  src="#a" animation-mixer></a-gltf-model>
+           </a-entity>
 
     </a-scene>
 

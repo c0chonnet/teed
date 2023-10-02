@@ -6,6 +6,12 @@ from config import Config
 from sqlalchemy import create_engine, MetaData, Table, sql
 import sshtunnel
 from dotenv import load_dotenv
+import json
+import time
+import folium
+import folium.plugins
+import osmnx as ox, networkx as nx
+from PIL import Image
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -84,10 +90,125 @@ def index():
 def visit():
     return render_template('visit.html', title=_('Exhibition'))
 
+@app.route('/end',methods=['GET'])
+def end():
+    visit=request.args.get('visit')
+    if visit == 'none':
+        iframe = 'none'
+
+    else:
+
+        with Tunneling() as t:
+            with t.engine.connect() as connection:
+                visitartworks = connection.execute(sql.text('''
+                SELECT artworks.*, artists.name a_name, artists.ig
+                FROM artworks JOIN visits_artworks ON visits_artworks.artwork_id = artworks.id 
+                AND visits_artworks.visit_id = :visit
+                JOIN artists ON artworks.artist_id = artists.id ;''').bindparams(visit=int(visit)))
+        
+        min_lat = 58.2
+        min_lon = 26.5
+        max_lat = 58.6
+        max_lon = 26.8
+
+        m = folium.Map(tiles= 'https://api.mapbox.com/styles/v1/c0chonnet/clhnpz6f701p801pr5dhp8tbh/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYzBjaG9ubmV0IiwiYSI6ImNrYno3NGtlbTA1ZDgzM3BtbDhzNGNnbGoifQ.eRl5T1mXLzwFZsxx0K942A',
+                       position='absolute',
+                       location=[58.3784716, 26.7229996],
+                       zoom_start=13, max_zoom=16, min_zoom=12,
+                       attr='© Mapbox 💗 #näitusteed',
+                       control_scale=True,
+                       min_lat=min_lat,
+                       max_lat=max_lat,
+                       min_lon=min_lon,
+                       max_lon=max_lon,
+                       prefer_canvas=True,
+                       max_bounds=True
+                       )
+        points = []
+        for a in visitartworks:
+            points.append((float(a.lon), float(a.lat)))
+            icon_image = os.path.join(os.environ['UPLOAD_FOLDER'], 'pic', str(a.id) + '.jpg')
+            im = Image.open(icon_image)
+            w,h = im.size
+            ic = folium.features.CustomIcon(icon_image, icon_size=(70, h*(70/w)))
+            mk = folium.Marker([a.lon, a.lat], icon=ic, popup=folium.Popup(f'''
+            <b style="text-transform:uppercase;">{a.a_name}</b><br>
+            <b>{a.name}</b>
+            <p style="font-size:70%;">@{a.ig}</p>
+            {a.street} {a.building}
+            '''))
+            m.add_child(mk)
+
+ #### ROUTING (RAW!!!)
+
+        ox.config(use_cache=True, log_console=True)
+        place_name = "Tartu, Estonia"
+        G = ox.graph_from_place(place_name, network_type='all')
+
+        places = []
+        for i in range(len(points)):
+            node = ox.distance.nearest_nodes(G, points[i][1], points[i][0])
+            places.append(node)
+        path = []
+        current_node = places[0]
+
+        while len(places) > 0:
+            nearest_place = min(places, key=lambda place: nx.shortest_path_length(G, current_node, place))
+            route = nx.shortest_path(G, current_node, nearest_place)
+            path.extend(route[:-1])
+            current_node = nearest_place
+            places.remove(nearest_place)
+
+        route=[]
+        for node in path:
+            route.append((G.nodes[node]['y'], G.nodes[node]['x']))
+
+##########
+        folium.PolyLine(route, color='#dfd821', weight=8).add_to(m)
+        m.get_root().width = "100%"
+        m.get_root().height = "70vh"
+        iframe = m.get_root()._repr_html_()
+
+    return render_template('end.html',
+                           iframe=iframe,
+                           visit=visit)
+@app.route('/visited', methods=['POST'])
+def visited():
+    ids=None
+
+    if request.form.get('jsondata'):
+        data = json.loads(request.form.get('jsondata'))
+        t = time.localtime()
+        current_time = time.strftime("%H:%M:%S", t)
+        ids = set(e['id'] for e in data)
+
+    if ids is None:
+        return redirect(url_for('end', visit='none'))
+
+    if 'end' in request.form and request.form['end'] == 'true':
+        with Tunneling() as t:
+            with t.engine.connect() as connection:
+                query = sql.text('''INSERT INTO visits(end_time) 
+                            VALUES (:end_time) RETURNING id''')
+                query = query.bindparams(end_time=current_time)
+                result = connection.execute(query).fetchone()
+                visit = result.id
+                connection.commit()
+
+                for id in ids:
+                    query = sql.text('''INSERT INTO visits_artworks (visit_id, artwork_id) 
+                                                VALUES (:visit, :artwork)''')
+                    query = query.bindparams(visit=visit, artwork=id)
+                    connection.execute(query)
+                connection.commit()
+        return redirect(url_for('end', visit=visit))
+    return ''
 
 @multilingual.route('/arscene')
 def arscene():
-    return render_template('arscene.html')
+    with open(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', '77' + '.txt'), "r", encoding='utf-8') as f:
+        text = "\n".join(f.read().splitlines())
+    return render_template('arscene.html', text=text)
 
 
 @app.route('/upload')
@@ -95,9 +216,42 @@ def upload():
       with Tunneling() as t:
         with t.engine.connect() as connection:
             artists = connection.execute(sql.text('SELECT * FROM artists;'))
-            artworks = connection.execute(sql.text('''SELECT artworks.id, artworks.name, artists.name AS aname
+            artworks = connection.execute(sql.text('''SELECT artworks.*, artists.name AS a_name
                                                    FROM artworks JOIN artists ON artists.id = artworks.artist_id;'''))
-      return render_template('upload.html', artists=artists, artworks=artworks)
+
+      min_lat = 58.2
+      min_lon = 26.5
+      max_lat = 58.6
+      max_lon = 26.8
+
+      m = folium.Map(
+          tiles='https://api.mapbox.com/styles/v1/c0chonnet/clhnpz6f701p801pr5dhp8tbh/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYzBjaG9ubmV0IiwiYSI6ImNrYno3NGtlbTA1ZDgzM3BtbDhzNGNnbGoifQ.eRl5T1mXLzwFZsxx0K942A',
+          position='absolute',
+          location=[58.3784716, 26.7229996],
+          zoom_start=11, max_zoom=16, min_zoom=10,
+          attr='© Mapbox 💗 #näitusteed',
+          control_scale=True,
+          min_lat=min_lat,
+          max_lat=max_lat,
+          min_lon=min_lon,
+          max_lon=max_lon,
+          prefer_canvas=True,
+          max_bounds=True
+          )
+
+      for a in artworks:
+          mk = folium.Marker([a.lon, a.lat], popup=folium.Popup(f'''
+                 <b style="text-transform:uppercase;">{a.name}</b><br>
+                 <b>{a.a_name}</b>
+                 {a.street} {a.building}
+                 '''))
+          m.add_child(mk)
+
+      m.get_root().width = "400px"
+      m.get_root().height = "300px"
+      iframe = m.get_root()._repr_html_()
+
+      return render_template('upload.html', artists=artists, artworks=artworks,iframe=iframe)
 
 
 # Babel
@@ -108,6 +262,7 @@ babel = Babel(app)
 def get_locale():
     if not g.get('lang_code', None):
         g.lang_code = request.accept_languages.best_match(app.config['LANGUAGES'])
+
     return g.lang_code
 
 

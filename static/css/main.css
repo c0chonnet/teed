@@ -102,7 +102,7 @@ h6 {
 
 
 .content {
-    padding: 30px 50px;
+    padding: 20px 30px;
 }
 
 .content-head {
@@ -198,15 +198,54 @@ input[type=file]::file-selector-button {
 
  .artistpic {
  background: #dfd821;
- width:80px;
- height:80px;
+ width:90px;
+ height:90px;
  vertical-align: middle;
+ object-fit: scale-down;
  }
 
 .artisttext {
 padding:15px;
 vertical-align: middle;
 }
+.visit-button {
+z-index: 99;
+position:absolute;
+bottom:15%;
+left:5%;
+font-size:140%;
+}
+
+.hashtag {
+z-index: 98;
+position:absolute;
+bottom:20%;
+left:5%;
+font-size:140%;
+color:white;
+opacity:0.9;
+}
+
+.route-map {
+width: 100%;
+height:60vh;
+max-width: 800px;
+margin: 0 auto;
+position: relative;
+overflow: hidden;
+margin-bottom: 30px;
+}
+
+.route-map iframe {
+ position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+border: none;
+ }
+
+
 
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
