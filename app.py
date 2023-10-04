@@ -219,39 +219,7 @@ def upload():
             artworks = connection.execute(sql.text('''SELECT artworks.*, artists.name AS a_name
                                                    FROM artworks JOIN artists ON artists.id = artworks.artist_id;'''))
 
-      min_lat = 58.2
-      min_lon = 26.5
-      max_lat = 58.6
-      max_lon = 26.8
-
-      m = folium.Map(
-          tiles='https://api.mapbox.com/styles/v1/c0chonnet/clhnpz6f701p801pr5dhp8tbh/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYzBjaG9ubmV0IiwiYSI6ImNrYno3NGtlbTA1ZDgzM3BtbDhzNGNnbGoifQ.eRl5T1mXLzwFZsxx0K942A',
-          position='absolute',
-          location=[58.3784716, 26.7229996],
-          zoom_start=11, max_zoom=16, min_zoom=10,
-          attr='© Mapbox 💗 #näitusteed',
-          control_scale=True,
-          min_lat=min_lat,
-          max_lat=max_lat,
-          min_lon=min_lon,
-          max_lon=max_lon,
-          prefer_canvas=True,
-          max_bounds=True
-          )
-
-      for a in artworks:
-          mk = folium.Marker([a.lon, a.lat], popup=folium.Popup(f'''
-                 <b style="text-transform:uppercase;">{a.name}</b><br>
-                 <b>{a.a_name}</b>
-                 {a.street} {a.building}
-                 '''))
-          m.add_child(mk)
-
-      m.get_root().width = "400px"
-      m.get_root().height = "300px"
-      iframe = m.get_root()._repr_html_()
-
-      return render_template('upload.html', artists=artists, artworks=artworks,iframe=iframe)
+      return render_template('upload.html', artists=artists, artworks=artworks)
 
 
 # Babel
