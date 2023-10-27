@@ -12,9 +12,12 @@ import folium
 import folium.plugins
 import osmnx as ox, networkx as nx
 from PIL import Image
+from cryptography.fernet import Fernet
 
 app = Flask(__name__)
 app.config.from_object(Config)
+key = Fernet.generate_key()
+cipher_suite = Fernet(key)
 
 ########## DB ####################
 
@@ -104,14 +107,15 @@ def end():
                 SELECT artworks.*, artists.name a_name, artists.ig
                 FROM artworks JOIN visits_artworks ON visits_artworks.artwork_id = artworks.id 
                 AND visits_artworks.visit_id = :visit
-                JOIN artists ON artworks.artist_id = artists.id ;''').bindparams(visit=int(visit)))
+                JOIN artists ON artworks.artist_id = artists.id ;''').bindparams(visit=int(cipher_suite.decrypt(visit).decode('utf-8'))))
         
         min_lat = 58.2
         min_lon = 26.5
         max_lat = 58.6
         max_lon = 26.8
 
-        m = folium.Map(tiles= 'https://api.mapbox.com/styles/v1/c0chonnet/clhnpz6f701p801pr5dhp8tbh/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYzBjaG9ubmV0IiwiYSI6ImNrYno3NGtlbTA1ZDgzM3BtbDhzNGNnbGoifQ.eRl5T1mXLzwFZsxx0K942A',
+        token = os.environ['MAPBOX']
+        m = folium.Map(tiles= 'https://api.mapbox.com/styles/v1/c0chonnet/clhnpz6f701p801pr5dhp8tbh/tiles/256/{z}/{x}/{y}@2x?access_token='+token ,
                        position='absolute',
                        location=[58.3784716, 26.7229996],
                        zoom_start=13, max_zoom=16, min_zoom=12,
@@ -178,30 +182,31 @@ def visited():
 
     if request.form.get('jsondata'):
         data = json.loads(request.form.get('jsondata'))
-        t = time.localtime()
-        current_time = time.strftime("%H:%M:%S", t)
         ids = set(e['id'] for e in data)
 
-    if ids is None:
-        return redirect(url_for('end', visit='none'))
-
     if 'end' in request.form and request.form['end'] == 'true':
-        with Tunneling() as t:
-            with t.engine.connect() as connection:
-                query = sql.text('''INSERT INTO visits(end_time) 
-                            VALUES (:end_time) RETURNING id''')
-                query = query.bindparams(end_time=current_time)
-                result = connection.execute(query).fetchone()
-                visit = result.id
-                connection.commit()
+        if ids is None or len(ids) == 1:
+            return redirect(url_for('end', visit='none'))
+        else:
+            with Tunneling() as t:
+                with t.engine.connect() as connection:
+                    e_t = time.localtime()
+                    end_time = time.strftime("%d.%m.%Y %H:%M:%S", e_t)
+                    start_time = request.form['start']
+                    query = sql.text('''INSERT INTO visits(start_time, end_time) 
+                                VALUES (:start_time, :end_time) RETURNING id''')
+                    query = query.bindparams(start_time=start_time, end_time=end_time)
+                    result = connection.execute(query).fetchone()
+                    visit = result.id
+                    connection.commit()
 
-                for id in ids:
-                    query = sql.text('''INSERT INTO visits_artworks (visit_id, artwork_id) 
-                                                VALUES (:visit, :artwork)''')
-                    query = query.bindparams(visit=visit, artwork=id)
-                    connection.execute(query)
-                connection.commit()
-        return redirect(url_for('end', visit=visit))
+                    for id in ids:
+                        query = sql.text('''INSERT INTO visits_artworks (visit_id, artwork_id) 
+                                                    VALUES (:visit, :artwork)''')
+                        query = query.bindparams(visit=visit, artwork=id)
+                        connection.execute(query)
+                    connection.commit()
+            return redirect(url_for('end', visit=cipher_suite.encrypt(bytes(str(visit), 'utf-8'))))
     return ''
 
 @multilingual.route('/arscene')
