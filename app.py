@@ -294,19 +294,6 @@ def delete_artwork():
                 os.remove(os.path.join(root, file))
     return render_template('ok.html')
 
-
-@app.route('/request_change', methods=['POST','GET'])
-def request_change():
-    with Tunneling() as t:
-        with t.engine.connect() as connection:
-            query = sql.text('UPDATE assets SET request = :crequest WHERE artwork_id = :id;')
-            query = query.bindparams(id=request.form['changeartwork'],
-                                     crequest=request.form['requestchange'])
-            connection.execute(query)
-            connection.commit()
-    return render_template('ok.html')
-
-
 @app.route('/upload_artwork', methods=['POST','GET'])
 def upload_artwork():
 
@@ -316,32 +303,29 @@ def upload_artwork():
     else:
         istarget = True
 
-    sound = request.files['sound']
-    if sound.filename == '':
-        issound = False
-    else:
-        issound = True
 
     with Tunneling() as t:
         with t.engine.connect() as connection:
 
-            query = sql.text('''INSERT INTO artworks(artist_id, name, lon, lat, street, building, preview) 
-                     VALUES (:artist,:artwork_name,:lon,:lat,:street,:bld, :trg) RETURNING id''')
+            query = sql.text('''INSERT INTO artworks(artist_id, name, lon, lat, street, building, preview,year,price,materials) 
+                     VALUES (:artist,:artwork_name,:lon,:lat,:street,:bld, :trg, :year, :price, :materials) RETURNING id''')
             query = query.bindparams(artist=request.form['artist'],
                                                        artwork_name=request.form['artwork-name'],
                                                        lon=request.form['lon'],
                                                        lat=request.form['lat'],
                                                        street=request.form['street'],
                                                        bld=request.form['bld'],
-                                                       trg=istarget)
+                                                       trg=istarget,
+                                                       year=request.form['year'],
+                                                       price=request.form['price'],
+                                                       materials=request.form['materials'])
             result = connection.execute(query).fetchone()
             lastid=result.id
 
-            query = sql.text('''INSERT INTO assets(artwork_id, type, sound, credits) 
-                                 VALUES (:a_id,:as_type,:sound,:credits)''')
+            query = sql.text('''INSERT INTO assets(artwork_id, type, credits) 
+                                 VALUES (:a_id,:as_type, :credits)''')
             query = query.bindparams(a_id=lastid,
                                      as_type=request.form['assettype'],
-                                     sound=issound,
                                      credits=request.form['credits'])
             connection.execute(query)
             connection.commit()
@@ -358,8 +342,6 @@ def upload_artwork():
         if istarget == True:
             files['target'].save(os.path.join(os.environ['UPLOAD_FOLDER'], str(lastid) + '.mind'))
 
-        if issound == True:
-            files['sound'].save(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', str(lastid) + '.mp3'))
 
     qr = url_for('preview', id=lastid,
                  ext=files['asset'].filename.rsplit('.', 1)[1].lower(),
