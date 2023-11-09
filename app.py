@@ -211,9 +211,11 @@ def visited():
 
 @multilingual.route('/arscene')
 def arscene():
-    with open(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', '77' + '.txt'), "r", encoding='utf-8') as f:
-        text = "\n".join(f.read().splitlines())
-    return render_template('arscene.html', text=text)
+    with open(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', '2' + '.txt'), "r", encoding='utf-8') as f:
+        t2 = "\n".join(f.read().splitlines())
+    with open(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', '3' + '.txt'), "r", encoding='utf-8') as f:
+        t3 = "\n".join(f.read().splitlines())
+    return render_template('arscene.html', t2=t2, t3=t3)
 
 
 @app.route('/upload')

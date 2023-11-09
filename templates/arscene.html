@@ -2,43 +2,130 @@
 <html lang="en">
 <head>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image.prod.js"></script>
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image-aframe.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <script src="{{ url_for('static', filename='scripts/aframe-gif-shader.js') }}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-     <script src="{{ url_for('static', filename='scripts/visit.js') }}"></script>
+     <!--<script src="{{ url_for('static', filename='scripts/visit.js') }}"></script>-->
     <meta charset="UTF-8">
     <title>scene</title>
 </head>
 <body>
 
-      <a-scene mindar-image="imageTargetSrc: {{ url_for('static', filename='ar/test.mind') }};"
+      <a-scene mindar-image="imageTargetSrc: {{ url_for('static', filename='ar/core.mind') }};"
                vr-mode-ui="enabled: false"
                device-orientation-permission-ui="enabled: false">
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-
-      <a-entity id="77" mindar-image-target="targetIndex: 0" text="value: {{ text }} ; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}" >
+      <a-entity id="1" mindar-image-target="targetIndex: 0">
+        <a-box position="0 -0.2 0.2" width="1.2" height="1.2" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/1.gif') }});alphaTest:0.5;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
       </a-entity>
 
-      <a-entity id="84" mindar-image-target="targetIndex: 1">
-        <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/84.gif') }});alphaTest:0.5;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+      <a-entity id="2" mindar-image-target="targetIndex: 1" text="value: {{ t2 }} ; position : {0 -0.2 0.2}; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}" >
       </a-entity>
 
-      <a-entity id="85" mindar-image-target="targetIndex: 2">
-        <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/85.gif') }});alphaTest:0.5;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+          <a-entity id="3" mindar-image-target="targetIndex: 2" text="value: {{ t3 }} ; position : {0 -0.2 0.2}; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}" >
       </a-entity>
 
-          <a-assets>
-              <a-asset-item id="a" src="{{ url_for('static', filename='ar/assets/89.glb') }}"></a-asset-item>
-        </a-assets>
+          <a-entity id="4" mindar-image-target="targetIndex: 3">
+        <a-box position="0 0.2 0.2" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/4.gif') }});alphaTest:0.5;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+      </a-entity>
 
-          <a-entity id="89" mindar-image-target="targetIndex: 3" >
-                <a-gltf-model rotation="0 0 0 " position="0 -0.27 0"  src="#a" animation-mixer></a-gltf-model>
-           </a-entity>
+          <a-entity id="5" mindar-image-target="targetIndex: 4">
+        <a-box position="0 0 0.3" width="1.2" height="1.2" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/5.gif') }});alphaTest:0.5;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+      </a-entity>
+
+       <a-entity id="6" mindar-image-target="targetIndex: 5">
+        <a-box position="0 -0.3 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/6.gif') }});alphaTest:0.5;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+      </a-entity>
+
+           <a-entity id="7" mindar-image-target="targetIndex: 6">
+        <a-box position="0 0.3 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/7.gif') }});alphaTest:0.5;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+      </a-entity>
+
+          <a-entity id="8" mindar-image-target="targetIndex: 7">
+              <a-box position="0 0 0.1" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/8.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+          </a-entity>
+
+<a-entity id="9" mindar-image-target="targetIndex: 8">
+    <a-box position="0.3 -0.3 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/9.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="10" mindar-image-target="targetIndex: 9">
+    <a-box position="0.1 0 0.1" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/10.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="11" mindar-image-target="targetIndex: 10">
+    <a-box position="0 0 0" width="1" height="0.9" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/11.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry="">
+    </a-box>
+</a-entity>
+
+<a-entity id="12" mindar-image-target="targetIndex: 11">
+    <a-box position="0 0 0.2" width="1" height="0.8" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/12.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="13" mindar-image-target="targetIndex: 12">
+    <a-box position="0.2 -0.1 0.2" width="1.1" height="1.1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/13.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="14" mindar-image-target="targetIndex: 13">
+    <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/14.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="15" mindar-image-target="targetIndex: 14" text= "value:{@lambaliha} ; position : {0 -0.8 0.2}; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}">
+    <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/15.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="17" mindar-image-target="targetIndex: 16">
+    <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/17.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="18" mindar-image-target="targetIndex: 17">
+    <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/18.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="19" mindar-image-target="targetIndex: 18">
+    <a-box position="0 0.3 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/19.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="20" mindar-image-target="targetIndex: 19">
+    <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/20.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="21" mindar-image-target="targetIndex: 20">
+    <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/21.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="22" mindar-image-target="targetIndex: 21">
+    <a-box position="0 0 0.2" width="1.2" height="1.4" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/22.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="23" mindar-image-target="targetIndex: 22">
+    <a-box position="0 0 0.1" width="1.1" height="1.1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/23.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="24" mindar-image-target="targetIndex: 23">
+    <a-box position="0 0.3 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/24.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="25" mindar-image-target="targetIndex: 24">
+    <a-box position="0 0 0" width="0.8" height="0.8" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/25.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="26" mindar-image-target="targetIndex: 25">
+    <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/26.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="27" mindar-image-target="targetIndex: 26">
+    <a-box position="0 0.3 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/27.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
+
+<a-entity id="28" mindar-image-target="targetIndex: 27">
+    <a-box position="-0.5 0 0" width="1.4" height="1.4" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/28.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+</a-entity>
 
     </a-scene>
 
