@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image.prod.js"></script>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <script src="{{ url_for('static', filename='scripts/aframe-gif-shader.js') }}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-     <!--<script src="{{ url_for('static', filename='scripts/visit.js') }}"></script>-->
+    <script src="{{ url_for('static', filename='scripts/visit.js') }}"></script>
     <meta charset="UTF-8">
     <title>scene</title>
 </head>
@@ -24,10 +23,10 @@
         <a-box position="0 -0.1 0.2" width="1.2" height="1.2" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/1.gif') }});alphaTest:0.5;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
       </a-entity>
 
-      <a-entity id="2" mindar-image-target="targetIndex: 1" text="value: {{ t2 }} ; position : {0.2 -0.2 0.2}; width:{2}; height:{2}; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}" >
+      <a-entity id="2" mindar-image-target="targetIndex: 1" text="value: {{ t2 }} ; width:{2}; height:{2}; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}" >
       </a-entity>
 
-          <a-entity id="3" mindar-image-target="targetIndex: 2" text="value: {{ t3 }} ; position : {0.2 -0.2 0.2};  width:{2}; height:{2}; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}" >
+          <a-entity id="3" mindar-image-target="targetIndex: 2" text="value: {{ t3 }} ; width:{2}; height:{2}; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}" >
       </a-entity>
 
           <a-entity id="4" mindar-image-target="targetIndex: 3">
@@ -55,7 +54,7 @@
 </a-entity>
 
 <a-entity id="10" mindar-image-target="targetIndex: 9">
-    <a-box position="0.01 0 0.1" width="0.9" height="0.9" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/10.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+    <a-box position="0.07 0 0.1" width="0.9" height="0.9" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/10.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
 </a-entity>
 
 <a-entity id="11" mindar-image-target="targetIndex: 10">
@@ -75,7 +74,7 @@
     <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/14.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
 </a-entity>
 
-<a-entity id="15" mindar-image-target="targetIndex: 14" text= "value:{@lambaliha} ; position : {0.3 -1 0.2}; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}">
+<a-entity id="15" mindar-image-target="targetIndex: 14" text= "value:{\n \n \n \n \n \n \n lambaliha} ; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}">
     <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/15.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
 </a-entity>
 
@@ -119,7 +118,7 @@
     <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/26.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
 </a-entity>
 
-<a-entity id="27" mindar-image-target="targetIndex: 25">
+<a-entity id="27" mindar-image-target="targetIndex: 25"  text= "value:{\n \n \n \n \n \n \n maarisoe} ; font: {{ url_for('static', filename='font-msdf.json')}}; fontImage: {{ url_for('static', filename='font.png')}}>
     <a-box position="0 0 0.1" width="1.2" height="1.2" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/27.gif') }});alphaTest:0.5;" transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
 </a-entity>
 

@@ -10,13 +10,13 @@ import json
 import time
 import folium
 import folium.plugins
-import osmnx as ox, networkx as nx
 from PIL import Image
 from cryptography.fernet import Fernet
+import requests
 
 app = Flask(__name__)
 app.config.from_object(Config)
-key = Fernet.generate_key()
+key = bytes(os.environ['FERNET'], encoding='utf8')
 cipher_suite = Fernet(key)
 
 ########## DB ####################
@@ -107,7 +107,8 @@ def end():
                 SELECT artworks.*, artists.name a_name, artists.ig
                 FROM artworks JOIN visits_artworks ON visits_artworks.artwork_id = artworks.id 
                 AND visits_artworks.visit_id = :visit
-                JOIN artists ON artworks.artist_id = artists.id ;''').bindparams(visit=int(cipher_suite.decrypt(visit).decode('utf-8'))))
+                JOIN artists ON artworks.artist_id = artists.id 
+                ORDER BY random() limit 10;''').bindparams(visit=int(cipher_suite.decrypt(visit))))
         
         min_lat = 58.2
         min_lon = 26.5
@@ -130,52 +131,43 @@ def end():
                        )
         points = []
         for a in visitartworks:
-            points.append((float(a.lon), float(a.lat)))
-            icon_image = os.path.join(os.environ['UPLOAD_FOLDER'], 'pic', str(a.id) + '.jpg')
-            im = Image.open(icon_image)
-            w,h = im.size
-            ic = folium.features.CustomIcon(icon_image, icon_size=(70, h*(70/w)))
-            mk = folium.Marker([a.lon, a.lat], icon=ic, popup=folium.Popup(f'''
-            <b style="text-transform:uppercase;">{a.a_name}</b><br>
-            <b>{a.name}</b>
-            <p style="font-size:70%;">@{a.ig}</p>
-            {a.street} {a.building}
-            '''))
-            m.add_child(mk)
+                if (float(a.lon), float(a.lat)) not in points:
+                    points.append((float(a.lon), float(a.lat)))
+                else:
+                    continue
 
- #### ROUTING (RAW!!!)
+                icon_image = os.path.join(os.environ['UPLOAD_FOLDER'], 'pic', str(a.id) + '.png')
+                im = Image.open(icon_image)
+                w, h = im.size
+                ic = folium.features.CustomIcon(icon_image, icon_size=(w * (80 / h), 80))
+                mk = folium.Marker([a.lon, a.lat], icon=ic, popup=folium.Popup(f'''
+                                               <b style="text-transform:uppercase;">{a.a_name}</b><br>
+                                               <b>{a.name}. </b>{a.street} {a.building}<br>
+                                               <a style="color:black;font-size:70%;" href="https://www.instagram.com/{a.ig}" target="_blank">@{a.ig}</a>
+                                               '''))
+                m.add_child(mk)
 
-        ox.config(use_cache=True, log_console=True)
-        place_name = "Tartu, Estonia"
-        G = ox.graph_from_place(place_name, network_type='all')
+ #### ROUTING
+        points = sorted(points, key=lambda l: [l[0], l[1]])
+        st = ';'.join([str(a[1])+','+str(a[0]) for a in points])
+        route_r = requests.get(f'''https://api.mapbox.com/directions/v5/mapbox/walking/{st}?alternatives=false&continue_straight=true&geometries=geojson&overview=simplified&steps=false&access_token={os.environ['NAVIGATION']}''')
+        duration = round(route_r.json()['routes'][0]['duration']/3600)
+        distance = round(route_r.json()['routes'][0]['distance']/1000,1)
 
-        places = []
-        for i in range(len(points)):
-            node = ox.distance.nearest_nodes(G, points[i][1], points[i][0])
-            places.append(node)
-        path = []
-        current_node = places[0]
-
-        while len(places) > 0:
-            nearest_place = min(places, key=lambda place: nx.shortest_path_length(G, current_node, place))
-            route = nx.shortest_path(G, current_node, nearest_place)
-            path.extend(route[:-1])
-            current_node = nearest_place
-            places.remove(nearest_place)
-
-        route=[]
-        for node in path:
-            route.append((G.nodes[node]['y'], G.nodes[node]['x']))
+        route = route_r.json()['routes'][0]['geometry']
 
 ##########
-        folium.PolyLine(route, color='#dfd821', weight=8).add_to(m)
+        style = {'color': '#dfd821','weight': 8}
+        folium.GeoJson(route,  style_function=lambda x: style).add_to(m)
         m.get_root().width = "100%"
         m.get_root().height = "70vh"
         iframe = m.get_root()._repr_html_()
 
     return render_template('end.html',
                            iframe=iframe,
-                           visit=visit)
+                           visit=visit,
+                           duration=duration,
+                           distance=distance)
 @app.route('/visited', methods=['POST'])
 def visited():
     ids=None
