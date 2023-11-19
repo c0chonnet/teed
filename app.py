@@ -6,9 +6,18 @@ from config import Config
 from sqlalchemy import create_engine, MetaData, Table, sql
 import sshtunnel
 from dotenv import load_dotenv
+import json
+import time
+import folium
+import folium.plugins
+from PIL import Image
+from cryptography.fernet import Fernet
+import requests
 
 app = Flask(__name__)
 app.config.from_object(Config)
+key = bytes(os.environ['FERNET'], encoding='utf8')
+cipher_suite = Fernet(key)
 
 ########## DB ####################
 
@@ -84,10 +93,121 @@ def index():
 def visit():
     return render_template('visit.html', title=_('Exhibition'))
 
+@app.route('/end',methods=['GET'])
+def end():
+    visit=request.args.get('visit')
+    if visit == 'none':
+        iframe = 'none'
+
+    else:
+
+        with Tunneling() as t:
+            with t.engine.connect() as connection:
+                visitartworks = connection.execute(sql.text('''
+                SELECT artworks.*, artists.name a_name, artists.ig
+                FROM artworks JOIN visits_artworks ON visits_artworks.artwork_id = artworks.id 
+                AND visits_artworks.visit_id = :visit
+                JOIN artists ON artworks.artist_id = artists.id 
+                ORDER BY random() limit 10;''').bindparams(visit=int(cipher_suite.decrypt(visit))))
+        
+        min_lat = 58.2
+        min_lon = 26.5
+        max_lat = 58.6
+        max_lon = 26.8
+
+        token = os.environ['MAPBOX']
+        m = folium.Map(tiles= 'https://api.mapbox.com/styles/v1/c0chonnet/clhnpz6f701p801pr5dhp8tbh/tiles/256/{z}/{x}/{y}@2x?access_token='+token ,
+                       position='absolute',
+                       location=[58.3784716, 26.7229996],
+                       zoom_start=13, max_zoom=16, min_zoom=12,
+                       attr='© Mapbox 💗 #näitusteed',
+                       control_scale=True,
+                       min_lat=min_lat,
+                       max_lat=max_lat,
+                       min_lon=min_lon,
+                       max_lon=max_lon,
+                       prefer_canvas=True,
+                       max_bounds=True
+                       )
+        points = []
+        for a in visitartworks:
+                if (float(a.lon), float(a.lat)) not in points:
+                    points.append((float(a.lon), float(a.lat)))
+                else:
+                    continue
+
+                icon_image = os.path.join(os.environ['UPLOAD_FOLDER'], 'pic', str(a.id) + '.png')
+                im = Image.open(icon_image)
+                w, h = im.size
+                ic = folium.features.CustomIcon(icon_image, icon_size=(w * (80 / h), 80))
+                mk = folium.Marker([a.lon, a.lat], icon=ic, popup=folium.Popup(f'''
+                                               <b style="text-transform:uppercase;">{a.a_name}</b><br>
+                                               <b>{a.name}. </b>{a.street} {a.building}<br>
+                                               <a style="color:black;font-size:70%;" href="https://www.instagram.com/{a.ig}" target="_blank">@{a.ig}</a>
+                                               '''))
+                m.add_child(mk)
+
+ #### ROUTING
+        points = sorted(points, key=lambda l: [l[0], l[1]])
+        st = ';'.join([str(a[1])+','+str(a[0]) for a in points])
+        route_r = requests.get(f'''https://api.mapbox.com/directions/v5/mapbox/walking/{st}?alternatives=false&continue_straight=true&geometries=geojson&overview=simplified&steps=false&access_token={os.environ['NAVIGATION']}''')
+        duration = round(route_r.json()['routes'][0]['duration']/3600)
+        distance = round(route_r.json()['routes'][0]['distance']/1000,1)
+
+        route = route_r.json()['routes'][0]['geometry']
+
+##########
+        style = {'color': '#dfd821','weight': 8}
+        folium.GeoJson(route,  style_function=lambda x: style).add_to(m)
+        m.get_root().width = "100%"
+        m.get_root().height = "70vh"
+        iframe = m.get_root()._repr_html_()
+
+    return render_template('end.html',
+                           iframe=iframe,
+                           visit=visit,
+                           duration=duration,
+                           distance=distance)
+@app.route('/visited', methods=['POST'])
+def visited():
+    ids=None
+
+    if request.form.get('jsondata'):
+        data = json.loads(request.form.get('jsondata'))
+        ids = set(e['id'] for e in data)
+
+    if 'end' in request.form and request.form['end'] == 'true':
+        if ids is None or len(ids) == 1:
+            return redirect(url_for('end', visit='none'))
+        else:
+            with Tunneling() as t:
+                with t.engine.connect() as connection:
+                    e_t = time.localtime()
+                    end_time = time.strftime("%d.%m.%Y %H:%M:%S", e_t)
+                    start_time = request.form['start']
+                    query = sql.text('''INSERT INTO visits(start_time, end_time) 
+                                VALUES (:start_time, :end_time) RETURNING id''')
+                    query = query.bindparams(start_time=start_time, end_time=end_time)
+                    result = connection.execute(query).fetchone()
+                    visit = result.id
+                    connection.commit()
+
+                    for id in ids:
+                        query = sql.text('''INSERT INTO visits_artworks (visit_id, artwork_id) 
+                                                    VALUES (:visit, :artwork)''')
+                        query = query.bindparams(visit=visit, artwork=id)
+                        connection.execute(query)
+                    connection.commit()
+            return redirect(url_for('end', visit=cipher_suite.encrypt(bytes(str(visit), 'utf-8'))))
+    return ''
 
 @multilingual.route('/arscene')
 def arscene():
-    return render_template('arscene.html')
+    with open(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', '2' + '.txt'), "r", encoding='utf-8') as f:
+        t2 = "\n".join(f.read().splitlines())
+    with open(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', '3' + '.txt'), "r", encoding='utf-8') as f:
+        t3 = "\n".join(f.read().splitlines())
+    return render_template('arscene.html', t2=t2, t3=t3)
 
 
 @app.route('/upload')
@@ -95,8 +215,9 @@ def upload():
       with Tunneling() as t:
         with t.engine.connect() as connection:
             artists = connection.execute(sql.text('SELECT * FROM artists;'))
-            artworks = connection.execute(sql.text('''SELECT artworks.id, artworks.name, artists.name AS aname
+            artworks = connection.execute(sql.text('''SELECT artworks.*, artists.name AS a_name
                                                    FROM artworks JOIN artists ON artists.id = artworks.artist_id;'''))
+
       return render_template('upload.html', artists=artists, artworks=artworks)
 
 
@@ -108,6 +229,7 @@ babel = Babel(app)
 def get_locale():
     if not g.get('lang_code', None):
         g.lang_code = request.accept_languages.best_match(app.config['LANGUAGES'])
+
     return g.lang_code
 
 
@@ -166,19 +288,6 @@ def delete_artwork():
                 os.remove(os.path.join(root, file))
     return render_template('ok.html')
 
-
-@app.route('/request_change', methods=['POST','GET'])
-def request_change():
-    with Tunneling() as t:
-        with t.engine.connect() as connection:
-            query = sql.text('UPDATE assets SET request = :crequest WHERE artwork_id = :id;')
-            query = query.bindparams(id=request.form['changeartwork'],
-                                     crequest=request.form['requestchange'])
-            connection.execute(query)
-            connection.commit()
-    return render_template('ok.html')
-
-
 @app.route('/upload_artwork', methods=['POST','GET'])
 def upload_artwork():
 
@@ -188,32 +297,29 @@ def upload_artwork():
     else:
         istarget = True
 
-    sound = request.files['sound']
-    if sound.filename == '':
-        issound = False
-    else:
-        issound = True
 
     with Tunneling() as t:
         with t.engine.connect() as connection:
 
-            query = sql.text('''INSERT INTO artworks(artist_id, name, lon, lat, street, building, preview) 
-                     VALUES (:artist,:artwork_name,:lon,:lat,:street,:bld, :trg) RETURNING id''')
+            query = sql.text('''INSERT INTO artworks(artist_id, name, lon, lat, street, building, preview,year,price,materials) 
+                     VALUES (:artist,:artwork_name,:lon,:lat,:street,:bld, :trg, :year, :price, :materials) RETURNING id''')
             query = query.bindparams(artist=request.form['artist'],
                                                        artwork_name=request.form['artwork-name'],
                                                        lon=request.form['lon'],
                                                        lat=request.form['lat'],
                                                        street=request.form['street'],
                                                        bld=request.form['bld'],
-                                                       trg=istarget)
+                                                       trg=istarget,
+                                                       year=request.form['year'],
+                                                       price=request.form['price'],
+                                                       materials=request.form['materials'])
             result = connection.execute(query).fetchone()
             lastid=result.id
 
-            query = sql.text('''INSERT INTO assets(artwork_id, type, sound, credits) 
-                                 VALUES (:a_id,:as_type,:sound,:credits)''')
+            query = sql.text('''INSERT INTO assets(artwork_id, type, credits) 
+                                 VALUES (:a_id,:as_type, :credits)''')
             query = query.bindparams(a_id=lastid,
                                      as_type=request.form['assettype'],
-                                     sound=issound,
                                      credits=request.form['credits'])
             connection.execute(query)
             connection.commit()
@@ -230,8 +336,6 @@ def upload_artwork():
         if istarget == True:
             files['target'].save(os.path.join(os.environ['UPLOAD_FOLDER'], str(lastid) + '.mind'))
 
-        if issound == True:
-            files['sound'].save(os.path.join(os.environ['UPLOAD_FOLDER'], 'assets', str(lastid) + '.mp3'))
 
     qr = url_for('preview', id=lastid,
                  ext=files['asset'].filename.rsplit('.', 1)[1].lower(),

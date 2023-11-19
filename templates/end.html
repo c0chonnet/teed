@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static',  filename='favicon.ico')}}">
+    <title>End of the visit</title>
+</head>
+<body>
+
+<div class="is-center content">
+{% if iframe == 'none'%}
+
+    <p>You had no interactions during your visit! Please read the instructions and try again: </p>
+    <form action="/">
+                <button type="submit" class="pure-button">Try again</button>
+    </form>
+
+{% else %}
+
+    <p>Here is your route! The walk along this {{distance}} km route will take about {{duration}} h. Make a screenshot to revisit it in a real town and don't forget
+    to share it in social media with hashtag #näitusteed </p>
+    <p>You can always open this page via this link: teed.app/end?visit={{ visit }} </p>
+
+<div class="route-map">
+
+    {{ iframe | safe }}
+
+</div>
+
+    <p>Learn more about authors and support them subscribing in social networks!</p>
+<form action="/">
+                <button type="submit" class="pure-button">Learn more</button>
+</form>
+
+{% endif %}
+</div>
+</body>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <meta charset="UTF-8">
-     <link rel="icon" type="image/x-icon" href="{{ url_for('static',  filename='favicon.ico')}}">
+     <link rel="icon" type="image/x-icon" href="{{ url_for('static',  filename='fav.png')}}">
     <title>preview</title>
 </head>
 <body>
@@ -23,7 +23,7 @@
 
           {% if ext == 'gif'%}
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/'+ id + '.gif') }});alphaTest:0.5;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
+        <a-box position="0 0 0" width="1" height="1" depth="0" material="shader:gif;src:url({{ url_for('static', filename='ar/assets/'+ id + '.gif') }});alphaTest:0.5;transparent:true;"  transparent="true" gif="" rotation="" scale="" visible="" geometry=""></a-box>
       </a-entity>
           {% elif ext == 'glb' %}
           <a-assets>
