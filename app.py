@@ -96,8 +96,11 @@ def visit():
 @app.route('/end',methods=['GET'])
 def end():
     visit=request.args.get('visit')
+
     if visit == 'none':
         iframe = 'none'
+        duration = 'none'
+        distance = 'none'
 
     else:
 
