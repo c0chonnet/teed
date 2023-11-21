@@ -264,32 +264,6 @@ def preview( methods=['GET']):
 
     return render_template('preview.html', id=ids, ext=ext, text=text, sound=sound)
 
-@app.route('/delete_only_admin', methods=['POST','GET'])
-def delete_only_admin():
-    with Tunneling() as t:
-        with t.engine.connect() as connection:
-            artists = connection.execute(sql.text('SELECT * FROM artists;'))
-            artworks = connection.execute(sql.text('''SELECT artworks.id, artworks.name, artists.name AS aname
-                                                   FROM artworks JOIN artists ON artists.id = artworks.artist_id;'''))
-    return render_template('delete.html', artworks=artworks)
-
-@app.route('/delete_artwork', methods=['POST','GET'])
-def delete_artwork():
-    with Tunneling() as t:
-        with t.engine.connect() as connection:
-            query = sql.text('DELETE FROM assets WHERE artwork_id = :id;')
-            query = query.bindparams(id=request.form['deleteartwork'])
-            connection.execute(query)
-            query = sql.text('DELETE FROM artworks WHERE id = :id;')
-            query = query.bindparams(id=request.form['deleteartwork'])
-            connection.execute(query)
-            connection.commit()
-
-    for root, dirs, files in os.walk(os.environ['UPLOAD_FOLDER']):
-        for file in files:
-            if file.rsplit('.', 1)[0].lower() == str(request.form['deleteartwork']):
-                os.remove(os.path.join(root, file))
-    return render_template('ok.html')
 
 @app.route('/upload_artwork', methods=['POST','GET'])
 def upload_artwork():
