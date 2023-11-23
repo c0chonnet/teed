@@ -81,9 +81,8 @@ a.pure-button {
 .bold-link {
     color: black;
     font-weight: 600;
-    text-decoration: underline;
-    text-decoration-color: #dfd821;
-    text-decoration-thickness: 3px;
+    background-color: #dfd821;
+    text-decoration: none;
 }
 
 
@@ -171,6 +170,16 @@ a.pure-button {
 #instructions ol {
     margin-top: 0;
     margin-left: -10px;
+}
+#instructions > div {
+    margin-left: -20px;
+}
+.step-img {
+    width: 300px;
+    height: 200px;
+    background-color: grey;
+    margin: 0 auto;
+    margin-top: 30px;
 }
 .hashtag-span {
     background-color: #dfd821;

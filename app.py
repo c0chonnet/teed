@@ -93,7 +93,8 @@ def index():
 def visit():
     return render_template('visit.html', title=_('Visit'))
 
-@app.route('/end',methods=['GET'])
+
+@multilingual.route('/end', methods=['GET'])
 def end():
     visit=request.args.get('visit')
 
@@ -170,7 +171,8 @@ def end():
                            iframe=iframe,
                            visit=visit,
                            duration=duration,
-                           distance=distance)
+                           distance=distance,
+                           lang=g.lang_code)
 @app.route('/visited', methods=['POST'])
 def visited():
     ids=None

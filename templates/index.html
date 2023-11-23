@@ -8,7 +8,7 @@
             <div class="splash-subhead">
                 <p>{{ _('An interactive exhibition about Tartu') }}</p>
 
-                <p>{{ _('Read the instructions below and press "Start"') }}</p>
+                <p>{{ _('Read the instructions below and press <i>Start</i>') }}</p>
             </div>
             <a href="{{ url_for('multilingual.visit') }}" class="">
                 <div class="pure-button pure-button-primary">
@@ -28,64 +28,57 @@
                  <div class="pure-g">
                      <ol>
                          <li>
-                             <p class="l-box">
-                                 Press "Start" and allow camera access in your browser.
-                                 This is necessary for interacting with the artwork; the site does not
-                                 collect any personal data.
+                             <div class="step-img"></div>
+                             <p class="l-box step">
+                                 {{ _('Press <i>Start</i> and allow camera access in your browser. This is necessary for interacting with the artwork; the site does not collect any personal data.') }}
                              </p>
                          </li>
                          <li>
-                             <p class="l-box">
-                                 When the loading has stopped, and you see the scanner screen,
-                                 the AR engine is ready for work. Loading can take up to one minute.
+                             <div class="step-img"></div>
+                             <p class="l-box step">
+                                 {{ _('When the loading has stopped, and you see the scanner screen, the AR engine is ready for work. Loading can take up to one minute.') }}
                              </p>
                          </li>
                          <li>
-                             <p class="l-box">
-                                 Select an artwork and move your camera towards it to view the augmentation.
-                                 Each painting has one, and augmented sketches in the sketchbooks are marked
-                                 with a special sticker.
+                             <div class="step-img"></div>
+                             <p class="l-box step">
+                                 {{ _('Select an artwork and move your camera towards it to view the augmentation. Each painting has one, and augmented sketches in the sketchbooks are marked with a special sticker.') }}
                              </p>
                          </li>
                          <li>
-                             <p class="l-box">
-                                 Scan the artworks using a mobile phone. Do not move the camera from one work
-                                 to another too fast, wait for the scanner to appear again. Augmentations can
-                                 change with delay, depending on the smartphone's model and the browser being used.
+                             <div class="step-img"></div>
+                             <p class="l-box step">
+                                 {{ _('Scan the artworks using a mobile phone. Do not move the camera from one work to another too fast, wait for the scanner to appear again. Augmentations can change with delay, depending on the smartphone\'s model and the browser being used.') }}
                              </p>
                          </li>
                          <li>
-                             <p class="l-box">
-                                 If the scanning animation disappeared but an augmentation did not appear, refresh
-                                 the page and start again. It is recommended to interact with 5-10 works per visit,
-                                 this way the AR engine can work better and the resulting routes are of reasonable length.
+                             <div class="step-img"></div>
+                             <p class="l-box step">
+                                 {{ _('If the scanning animation disappeared but an augmentation did not appear, refresh the page and start again. It is recommended to interact with 5-10 works per visit, this way the AR engine can work better and the resulting routes are of reasonable length.') }}
                              </p>
                          </li>
                          <li>
-                             <p class="l-box">
-                                 We would appreciate if you could post screenshots or screen videos of artwork animations
-                                 with the hashtag <span class="hashtag-span">#näitusteed</span> to social media! After visiting all the interesting works,
-                                 press "End visit".
+                             <div class="step-img"></div>
+                             <p class="l-box step">
+                                 {{ _('We would appreciate if you could post screenshots or screen videos of artwork animations with the hashtag') }} <span class="hashtag-span">#näitusteed</span>{{ _(' to social media! After visiting all the interesting works, press <i>End visit</i>.') }}
                              </p>
                          </li>
                          <li>
-                             <p class="l-box">
-                                 You will be redirected to the page of your exhibition route, which is mapped to the
-                                 city. It will contain up to 10 points from your visit. If you want to get
-                                 a route with certain artworks, start a new visit and interact only with needed pieces.
+                             <div class="step-img"></div>
+                             <p class="l-box step">
+                                 {{ _('You will be redirected to the page of your exhibition route, which is mapped to the city. It will contain up to 10 points from your visit. If you want to get a route with certain artworks, start a new visit and interact only with needed pieces.') }}
                              </p>
                          </li>
                          <li>
-                             <p class="l-box">
-                                 Use the route to take a walk through the city and enjoy the beauty of Tartu &#8212; the European
-                                 Capital of Culture 2024! Don't forget to check out Plantarium to buy stickers
-                                 from our artists.
+                             <div class="step-img"></div>
+                             <p class="l-box step">
+                                 {{ _('Use the route to take a walk through the city and enjoy the beauty of Tartu &#8212; the European Capital of Culture 2024! Don\'t forget to check out Plantarium to buy stickers from our artists.') }}
                              </p>
                          </li>
                      </ol>
 
                      <div class="center">
-                         <p class="enjoy">Enjoy the visit!</p>
+                         <p class="enjoy">{{ _('Enjoy the visit!') }}</p>
                          <a href="{{ url_for('multilingual.visit') }}" class="">
                             <div class="pure-button pure-button-primary">
                                 {{ _('Start') }}
@@ -100,12 +93,7 @@
                     {{ _('About') }}
                 </h2>
                 <p class="l-box">
-                    The exhibition was created by local developers and artists with the support
-                    of Plantarium by Jardin and the Open Cultural Platform of Aparaaditehas.
-                    During the exhibition period, a number of lectures and workshops will be
-                    held by the participants, so check out the
-                    <a class="bold-link" href="https://www.facebook.com/events/1988561021524233">Facebook event</a>
-                    to stay updated and support our artists with a follow on social media!
+                    {{ _('The exhibition was created by local developers and artists with the support of Plantarium by Jardin and the Open Cultural Platform of Aparaaditehas. During the exhibition period, a number of lectures and workshops will be held by the participants, so check out the') }} <a class="bold-link" href="https://www.facebook.com/events/1988561021524233">{{ _('Facebook event') }}</a>{{ _(' to stay updated and support our artists with a follow on social media!') }}
                 </p>
                 <div class="pure-g logo-block">
                     <div class="pure-u-1-2">
@@ -121,8 +109,7 @@
                     </div>
                     <div class="pure-u-2-3">
                         <p class="l-box">
-                            We support the organization Helping to Leave &#8212; 24/7 helpline for Ukrainians evacuating from
-                            areas of military conflict. <a class="bold-link" href="https://helpingtoleave.org/">Learn more and donate</a>
+                            {{ _('We support the organization Helping to Leave &#8212; 24/7 helpline for Ukrainians evacuating from areas of military conflict.') }} <a class="bold-link" href="https://helpingtoleave.org/">{{ _('Learn more and donate') }}</a>
                         </p>
                     </div>
                 </div>
@@ -143,17 +130,15 @@
                             <div class="social-icons">
                                 <a href="https://www.instagram.com/by_vaenaton/" target="_blank"><i class="fab fa-instagram"></i></a>
                                 <a href="mailto:vaenaton@gmail.com"><i class="fas fa-envelope"></i></a>
-                                <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
-                                <a href="" target="_blank"><i class="fab fa-behance"></i></a>
+                                <a href="https://www.linkedin.com/in/kirakharlash" target="_blank"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://www.behance.net/vaenaton" target="_blank"><i class="fab fa-behance"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="pure-g">
                         <div class="l-box pure-u-5-5">
                             <p>
-                                Exhibition author and developer, data analyst. Self-taught artist
-                                and illustrator, publishing her artwork under the nickname (by) vaenaton.
-                                Master of Digital Humanities.
+                                {{ _('Exhibition author and developer, data analyst. Self-taught artist and illustrator, publishing her artwork under the nickname (by) vaenaton. Master of Digital Humanities.') }}
                             </p>
                         </div>
                     </div>
@@ -176,9 +161,7 @@
                     <div class="pure-g">
                         <div class="l-box pure-u-5-5">
                             <p>
-                                Exhibition organizer and developer, designer. Student at the Institute
-                                of Mathematics and Statistics @ UT, Tartu Art School graduate.
-                                Engineer in one of the Estonian unicorns.
+                                {{ _('Exhibition organizer and developer, designer. Student at the Institute of Mathematics and Statistics @ UT, Tartu Art School graduate. Engineer in one of the Estonian unicorns.') }}
                             </p>
                         </div>
                     </div>
@@ -201,8 +184,7 @@
                     <div class="pure-g">
                         <div class="l-box pure-u-5-5">
                             <p>
-                                Local self-taught painter whose works can be found on canvases as well
-                                as streets. Member of Tartu Artists' Union and soon-to-be city naivist.
+                                {{ _('Local self-taught painter whose works can be found on canvases as well as streets. Member of Tartu Artists\' Union and soon-to-be city naivist.') }}
                             </p>
                         </div>
                     </div>
@@ -224,11 +206,7 @@
                     <div class="pure-g">
                         <div class="l-box pure-u-5-5">
                             <p>
-                                Sashami a.k.a. Sasha Milyakina is a research fellow in Semiotics at UT
-                                and a freelance artist who captures Tartu's architectural heritage in art form.
-                                Starting from 2017, she has created calendars inspired by the city. Her clients
-                                include the University of Tartu, Tartu City Government, Tartu City Museum, Setomaa museums
-                                and many more. Sasha is from Moscow and has been living in Estonia since 2013.
+                                {{ _('Sashami a.k.a. Sasha Milyakina is a research fellow in Semiotics at UT and a freelance artist who captures Tartu\'s architectural heritage in art form. Starting from 2017, she has created calendars inspired by the city. Her clients include the University of Tartu, Tartu City Government, Tartu City Museum, Setomaa museums and many more. Sasha is from Moscow and has been living in Estonia since 2013.') }}
                             </p>
                         </div>
                     </div>
@@ -251,8 +229,7 @@
                     <div class="pure-g">
                         <div class="l-box pure-u-5-5">
                             <p>
-                                Also known as Olevus Art. Kristel's everyday companion on journeys and walks
-                                is her sketchbook &#8212; the place to capture her surroundings in various environments.
+                                {{ _('Also known as Olevus Art. Kristel\'s everyday companion on journeys and walks is her sketchbook &#8212; the place to capture her surroundings in various environments.') }}
                             </p>
                         </div>
                     </div>
@@ -274,7 +251,7 @@
                     <div class="pure-g">
                         <div class="l-box pure-u-5-5">
                             <p>
-                                Bachelor in Architecture, artist, currently works in Soulmark Tattoo & Barber.
+                                {{ _('Bachelor in Architecture, artist, currently works in Soulmark Tattoo & Barber.') }}
                             </p>
                         </div>
                     </div>

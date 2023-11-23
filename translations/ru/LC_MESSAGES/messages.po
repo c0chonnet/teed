@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-09-25 00:07+0300\n"
-"PO-Revision-Date: 2023-09-25 00:08+0300\n"
+"POT-Creation-Date: 2023-11-24 00:38+0200\n"
+"PO-Revision-Date: 2023-11-24 00:38+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -19,33 +19,217 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app.py:36
-msgid "Home test"
-msgstr "Стартовая"
+#: app.py:89
+msgid "Interactive exhibition | Home page"
+msgstr "Интерактивная выставка | Домашняя страница"
 
-#: app.py:41
-msgid "Exhibition"
-msgstr "Выставка"
+#: app.py:94
+msgid "Visit"
+msgstr "Посещение"
 
-#: templates/base.html:25 templates/index.html:41
+#: templates/base.html:26 templates/index.html:93
 msgid "About"
 msgstr "О выставке"
 
-#: templates/index.html:8
+#: templates/end.html:10
+msgid "End of the visit"
+msgstr "Завершение посещения"
+
+#: templates/end.html:17
 msgid ""
-"Interactive exhibition about Tartu. Read the instructions in the gallery "
-"or below and press \"Start\""
-msgstr "Интерактивная выставка о Тарту. Прочтите инструкции в галерее или внизу и нажмите «Старт»"
+"You had no interactions during your visit! Please read the instructions "
+"and try again."
+msgstr "К сожалению, вы не взаимодействовали с достаточным количеством работ! Пожалуйста, прочтите инструкции и попробуйте еще раз."
 
-#: templates/index.html:12
+#: templates/end.html:19
+msgid "Try again"
+msgstr "Попробовать снова"
+
+#: templates/end.html:24
+msgid "Here is your route! The walk along this"
+msgstr "Ваш маршрут готов! Прогулка по этому"
+
+#: templates/end.html:24
+msgid "km route will take about"
+msgstr "маршруту займет приблизительно"
+
+#: templates/end.html:24
+msgid ""
+"h. Make a screenshot to revisit it in a real town and don't forget to "
+"share it in social media with hashtag #näitusteed!"
+msgstr "ч. Поделитесь скриншотом в социальных сетях с хэштегом #näitusteed!"
+
+#: templates/end.html:25
+msgid "You can always open this page via this link:"
+msgstr "Вы всегда можете открыть маршрут по этой ссылке:"
+
+#: templates/end.html:33
+msgid ""
+"Learn more about authors and support them by subscribing in social "
+"networks:"
+msgstr "Узнайте больше об авторах выставки и поддержите их подпиской в социальных сетях:"
+
+#: templates/end.html:35
+msgid "Learn more"
+msgstr "Узнать больше"
+
+#: templates/index.html:9
+msgid "An interactive exhibition about Tartu"
+msgstr "Интерактивная выставка о Тарту"
+
+#: templates/index.html:11
+msgid "Read the instructions below and press <i>Start</i>"
+msgstr "Прочтите инструкции и нажмите <i>Начать</i>"
+
+#: templates/index.html:15 templates/index.html:84
 msgid "Start"
-msgstr "Старт"
+msgstr "Начать"
 
-#: templates/index.html:20
-msgid "How to interact with artworks"
-msgstr "Инструкция по посещению выставки"
+#: templates/index.html:26
+msgid "Instructions"
+msgstr "Инструкция"
 
-#: templates/index.html:49
+#: templates/index.html:33
+msgid ""
+"Press <i>Start</i> and allow camera access in your browser. This is necessary "
+"for interacting with the artwork; the site does not collect any personal "
+"data."
+msgstr "Нажмите <i>Начать</i> и разрешите доступ к камере вашего браузера. Это необходимо для взаимодействия с работами; сайт не собирает личные данные."
+
+#: templates/index.html:39
+msgid ""
+"When the loading has stopped, and you see the scanner screen, the AR "
+"engine is ready for work. Loading can take up to one minute."
+msgstr "Когда круглый прелоадер изменится на сканирующий, AR готов к просмотру. Это может занять до минуты."
+
+#: templates/index.html:45
+msgid ""
+"Select an artwork and move your camera towards it to view the "
+"augmentation. Each painting has one, and augmented sketches in the "
+"sketchbooks are marked with a special sticker."
+msgstr "Выберите интересующую работу и направьте на нее камеру, чтобы увидеть дополнение. Дополнение есть у каждой картины, а AR-скетчи в скетчбуках помечены специальным стикером."
+
+#: templates/index.html:51
+msgid ""
+"Scan the artworks using a mobile phone. Do not move the camera from one "
+"work to another too fast, wait for the scanner to appear again. "
+"Augmentations can change with delay, depending on the smartphone's model "
+"and the browser being used."
+msgstr "Просматривайте работы при помощи мобильного телефона. Не переводите камеру с работы на работу слишком резко, дождитесь появления сканирующего прелоадера. В зависимости от модели смартфона и браузера, дополнения сменяются медленно, в течение нескольких секунд."
+
+#: templates/index.html:57
+msgid ""
+"If the scanning animation disappeared but an augmentation did not appear,"
+" refresh the page and start again. It is recommended to interact with "
+"5-10 works per visit, this way the AR engine can work better and the "
+"resulting routes are of reasonable length."
+msgstr "Если сканирующая анимация пропала, а дополнение не появилось, обновите страницу и начните заново. Рекомендованное количество работ в одном визите &#8212; 5-10. Это нужно для лучшей работы AR дополнений и более короткого маршрута."
+
+#: templates/index.html:63
+msgid ""
+"We would appreciate if you could post screenshots or screen videos of "
+"artwork animations with the hashtag"
+msgstr "Мы будем очень благодарны увидеть ваши скриншоты или видео в социальных сетях с хештегом"
+
+#: templates/index.html:63
+msgid ""
+" to social media! After visiting all the interesting works, press <i>End "
+"visit</i>."
+msgstr "! После посещения всех интересных работ нажмите <i>Завершить посещение</i>."
+
+#: templates/index.html:69
+msgid ""
+"You will be redirected to the page of your exhibition route, which is "
+"mapped to the city. It will contain up to 10 points from your visit. If "
+"you want to get a route with certain artworks, start a new visit and "
+"interact only with needed pieces."
+msgstr "Вы будете перенаправлены на страницу вашего "маршрута", перенесенного на улицы реального города. В него войдет до 10 случайных точек из вашего посещения. Если вы хотите получить точный маршрут, начните новый визит и взаимодействуйте только с теми работами, которые в нем нужны."
+
+#: templates/index.html:75
+msgid ""
+"Use the route to take a walk through the city and enjoy the beauty of "
+"Tartu &#8212; the European Capital of Culture 2024! Don't forget to check"
+" out Plantarium to buy stickers from our artists."
+msgstr "Используйте маршрут в городе и насладитесь красотой культурной столицы! Не забудьте посетить Plantarium, чтобы купить стикеры с работами художниц!"
+
+#: templates/index.html:81
+msgid "Enjoy the visit!"
+msgstr "Приятного посещения!"
+
+#: templates/index.html:96
+msgid ""
+"The exhibition was created by local developers and artists with the "
+"support of Plantarium by Jardin and the Open Cultural Platform of "
+"Aparaaditehas. During the exhibition period, a number of lectures and "
+"workshops will be held by the participants, so check out the"
+msgstr "Выставка создана местными разработчицами и художницами при поддержке Открытой платформы Aparaaditehas и Plantarium. Подпишитесь на"
+
+#: templates/index.html:96
+msgid "Facebook event"
+msgstr "Facebook event"
+
+#: templates/index.html:96
+msgid " to stay updated and support our artists with a follow on social media!"
+msgstr ", чтобы не пропустить лекции и воркшопы. Поддержите нас подпиской в социальных сетях!"
+
+#: templates/index.html:112
+msgid ""
+"We support the organization Helping to Leave &#8212; 24/7 helpline for "
+"Ukrainians evacuating from areas of military conflict."
+msgstr "Мы помогаем организации Helping to Leave &#8212; круглосуточной линии поддержки для украинцев, эвакуирующихся из зоны военного конфликта."
+
+#: templates/index.html:112
+msgid "Learn more and donate"
+msgstr "Узнать больше и поддержать"
+
+#: templates/index.html:120
 msgid "Participants"
 msgstr "Участники"
+
+#: templates/index.html:141
+msgid ""
+"Exhibition author and developer, data analyst. Self-taught artist and "
+"illustrator, publishing her artwork under the nickname (by) vaenaton. "
+"Master of Digital Humanities."
+msgstr "Автор и разработчица выставки, аналитик данных. Художница-самоучка, публикующая свои работы под ником (by) vaenaton. Магистр Digital Humanities."
+
+#: templates/index.html:164
+msgid ""
+"Exhibition organizer and developer, designer. Student at the Institute of"
+" Mathematics and Statistics @ UT, Tartu Art School graduate. Engineer in "
+"one of the Estonian unicorns."
+msgstr "Организатор и разработчица выставки, дизайнер. Студентка Института математики и статистики Университета Тарту, выпускница Тартуской художественной школы. Разработчица в эстонской компании-единороге."
+
+#: templates/index.html:187
+msgid ""
+"Local self-taught painter whose works can be found on canvases as well as"
+" streets. Member of Tartu Artists' Union and soon-to-be city naivist."
+msgstr "Работы этой художницы-самоучки вы можете увидеть и на холстах, и на улицах. Член Союза художников Тарту, в будущем — художница-наивист Тарту."
+
+#: templates/index.html:209
+msgid ""
+"Sashami a.k.a. Sasha Milyakina is a research fellow in Semiotics at UT "
+"and a freelance artist who captures Tartu's architectural heritage in art"
+" form. Starting from 2017, she has created calendars inspired by the "
+"city. Her clients include the University of Tartu, Tartu City Government,"
+" Tartu City Museum, Setomaa museums and many more. Sasha is from Moscow "
+"and has been living in Estonia since 2013."
+msgstr "Sashami, или Саша Милякина — научная сотрудница Института философии и семиотики Тартуского университета. Саша занимается сохранением архитектурного наследия Тарту в живописной форме и с 2017 года создает календари, посвященные городу. В числе ее клиентов — Тартуский университет, Городская управа Тарту, Городской музей Тарту, Музеи Сетомаа и многие другие. Родилась в Москве, живет в Тарту с 2013 года."
+
+#: templates/index.html:232
+msgid ""
+"Also known as Olevus Art. Kristel's everyday companion on journeys and "
+"walks is her sketchbook &#8212; the place to capture her surroundings in "
+"various environments."
+msgstr "Также известен, как Olevus Art. Работы этой художницы-самоучки вы можете увидеть и на холстах, и на улицах. Член Союза художников Тарту, в будущем — художница-наивист Тарту."
+
+#: templates/index.html:254
+msgid ""
+"Bachelor in Architecture, artist, currently works in Soulmark Tattoo & "
+"Barber."
+msgstr "Бакалавр архитектуры, художница, тату-мастер в Soulmark Tattoo & Barber."
+
+#: templates/visit.html:10
+msgid "End visit"
+msgstr "Завершить посещение"
 
