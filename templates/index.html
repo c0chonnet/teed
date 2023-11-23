@@ -1,203 +1,286 @@
 {% extends "base.html" %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>TEED | Home test</title>
-</head>
-<body>
-    <div class="header">
-        <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-            <a class="pure-menu-heading" href="/">Teed</a>
-            <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link">EST</a></li>
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link">ENG</a></li>
-                <li class="pure-menu-item"><a href="#about" class="pure-menu-link">About</a></li>
-            </ul>
-        </div>
-    </div>
 
 {% block content %}
+
     <div class="splash-container">
         <div class="splash">
-            <h1 class="splash-head">TEED test</h1>
-            <p class="splash-subhead">
-                {{ _('Interactive exhibition about Tartu. Read the instructions in the gallery or below and press "Start"') }}
-            </p>
-            <p>
-                <a href="{{ url_for('multilingual.visit') }}" class="pure-button pure-button-primary">
+            <div><img class="teed-logo" src="/static/teed_logo.svg" alt="TEED"/></div>
+            <div class="splash-subhead">
+                <p>{{ _('An interactive exhibition about Tartu') }}</p>
+
+                <p>{{ _('Read the instructions below and press "Start"') }}</p>
+            </div>
+            <a href="{{ url_for('multilingual.visit') }}" class="">
+                <div class="pure-button pure-button-primary">
                     {{ _('Start') }}
-                </a>
-            </p>
+                </div>
+            </a>
+
         </div>
     </div>
+
     <div class="content-wrapper">
         <div class="content">
-            <h2 class="content-head is-center">
-                {{ _('How to interact with artworks') }}
-            </h2>
-            <div class="pure-g">
-                <div class="pure-u-1 pure-u-md-1-3">
-                    <p class="l-box">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.</p>
+            <div class="content-block" id="instructions">
+                <h2 class="content-head is-center">
+                    {{ _('Instructions') }}
+                </h2>
+                 <div class="pure-g">
+                     <ol>
+                         <li>
+                             <p class="l-box">
+                                 Press "Start" and allow camera access in your browser.
+                                 This is necessary for interacting with the artwork; the site does not
+                                 collect any personal data.
+                             </p>
+                         </li>
+                         <li>
+                             <p class="l-box">
+                                 When the loading has stopped, and you see the scanner screen,
+                                 the AR engine is ready for work. Loading can take up to one minute.
+                             </p>
+                         </li>
+                         <li>
+                             <p class="l-box">
+                                 Select an artwork and move your camera towards it to view the augmentation.
+                                 Each painting has one, and augmented sketches in the sketchbooks are marked
+                                 with a special sticker.
+                             </p>
+                         </li>
+                         <li>
+                             <p class="l-box">
+                                 Scan the artworks using a mobile phone. Do not move the camera from one work
+                                 to another too fast, wait for the scanner to appear again. Augmentations can
+                                 change with delay, depending on the smartphone's model and the browser being used.
+                             </p>
+                         </li>
+                         <li>
+                             <p class="l-box">
+                                 If the scanning animation disappeared but an augmentation did not appear, refresh
+                                 the page and start again. It is recommended to interact with 5-10 works per visit,
+                                 this way the AR engine can work better and the resulting routes are of reasonable length.
+                             </p>
+                         </li>
+                         <li>
+                             <p class="l-box">
+                                 We would appreciate if you could post screenshots or screen videos of artwork animations
+                                 with the hashtag <span class="hashtag-span">#näitusteed</span> to social media! After visiting all the interesting works,
+                                 press "End visit".
+                             </p>
+                         </li>
+                         <li>
+                             <p class="l-box">
+                                 You will be redirected to the page of your exhibition route, which is mapped to the
+                                 city. It will contain up to 10 points from your visit. If you want to get
+                                 a route with certain artworks, start a new visit and interact only with needed pieces.
+                             </p>
+                         </li>
+                         <li>
+                             <p class="l-box">
+                                 Use the route to take a walk through the city and enjoy the beauty of Tartu &#8212; the European
+                                 Capital of Culture 2024! Don't forget to check out Plantarium to buy stickers
+                                 from our artists.
+                             </p>
+                         </li>
+                     </ol>
+
+                     <div class="center">
+                         <p class="enjoy">Enjoy the visit!</p>
+                         <a href="{{ url_for('multilingual.visit') }}" class="">
+                            <div class="pure-button pure-button-primary">
+                                {{ _('Start') }}
+                            </div>
+                        </a>
+                     </div>
                 </div>
-                <div class="pure-u-1 pure-u-md-1-3">
-                    <p class="l-box"> Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor.</p>
-                </div>
-                <div class="pure-u-1 pure-u-md-1-3">
-                    <p class="l-box"> Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor.</p>
-                </div>
-           </div>
-
-            <div class="l-box" id="about">
-            <h2 class="content-head is-center ">
-                {{ _('About') }}
-            </h2>
-
-                   <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor.
-                   </p>
-            <h2 class="content-head is-center ">
-                {{ _('Participants') }}
-            </h2>
-               
-
-                <div class="artist1 pure-g">
-                    <div class="pure-u-1-5">
-                        <img class="artistpic" src="/static/kira.png" alt="">
-                    </div>
-                    <div class="pure-u-4-5 artisttext">
-                <h3 style="text-transform: uppercase;">Kira Harlašova</h3>
-                <div class="social-icons">
-                    <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="" target="_blank"><i class="fas fa-envelope"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-behance"></i></a>
-
-
-                 </div>
-
-                   <p> Exhibition author and developer, data analyst. Self-taught artist and illustrator,
-                       publishing her artwork under a nickname (by) vaenaton. Master of Digital Humanities
-                   </p>
-                        </div>
-                </div>
-
-
-                <div class="artist1 pure-g">
-                    <div class="pure-u-1-5">
-                        <img class="artistpic" src="#" alt="">
-                    </div>
-                    <div class="pure-u-4-5 artisttext">
-                <h3 style="text-transform: uppercase;">Mariliis Kütt</h3>
-                <div class="social-icons">
-                    <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="" target="_blank"><i class="fas fa-envelope"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
-
-                 </div>
-                   <p> Exhibition author and developer, designer. Student at the Institute of Mathematics and Statistics @ UT,
-                       Tartu Art School graduate. Engineer in one of the Estonian unicorns.
-                   </p>
-                        </div>
-                </div>
-
-
-                <div class="artist1 pure-g">
-                    <div class="pure-u-1-5">
-                        <img class="artistpic" src="/static/kairo.jpg" alt="">
-                    </div>
-                    <div class="pure-u-4-5 artisttext">
-                <h3 style="text-transform: uppercase;">Kairo</h3>
-                <div class="social-icons">
-                    <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="" target="_blank"><i class="fas fa-envelope"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-behance"></i></a>
-
-                 </div>
-                   <p> idk
-                   </p>
-                        </div>
-                </div>
-
-
-                <div class="artist1 pure-g">
-                    <div class="pure-u-1-5">
-                        <img class="artistpic" src="/static/sashami.png" alt="">
-                    </div>
-                    <div class="pure-u-4-5 artisttext">
-                <h3 style="text-transform: uppercase;">Sasha Milyakina</h3>
-                <div class="social-icons">
-                    <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="" target="_blank"><i class="fas fa-envelope"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-behance"></i></a>
-
-                 </div>
-                   <p> Sashami a.k.a. Sasha Milyakina is a research fellow in Semiotics at UT and a freelance artist who captures Tartu's architectural heritage in art form. Starting from 2017, she has created calendars inspired by the city. Her clients include the University of Tartu, Tartu City Government, Tartu City Museum, Setomaa museums
-                       and many more. Sasha is from Moscow and has been living in Estonia since 2013.
-                   </p>
-                        </div>
-                </div>
-
-                <div class="artist1 pure-g">
-                    <div class="pure-u-1-5">
-                        <img class="artistpic" src="/static/kristel_olevusart.jpg" alt="">
-                    </div>
-                    <div class="pure-u-4-5 artisttext">
-                <h3 style="text-transform: uppercase;">Kristel Sergo</h3>
-                <div class="social-icons">
-                    <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="" target="_blank"><i class="fas fa-envelope"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-behance"></i></a>
-
-                 </div>
-                   <p> Also known as Olevus Art. Kristel's everyday companion on journeys and walks is her sketchbook -- the place to capture
-                       her surroundings in various environments.
-                   </p>
-                        </div>
-                </div>
-
-                 <div class="artist1 pure-g">
-                    <div class="pure-u-1-5">
-                        <img class="artistpic" src="/static/sievka.png" alt="">
-                    </div>
-                    <div class="pure-u-4-5 artisttext">
-                <h3 style="text-transform: uppercase;">Yana Sievka-Goldobin</h3>
-                <div class="social-icons">
-                    <a href="" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="" target="_blank"><i class="fas fa-envelope"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="" target="_blank"><i class="fab fa-behance"></i></a>
-
-                 </div>
-                   <p> Bachelor in Architecture, artist, currently works in Soulmark Tattoo & Barber
-                   </p>
-                        </div>
-                </div>
-
             </div>
 
+            <div class="content-block" id="about">
+                <h2 class="content-head is-center">
+                    {{ _('About') }}
+                </h2>
+                <p class="l-box">
+                    The exhibition was created by local developers and artists with the support
+                    of Plantarium by Jardin and the Open Cultural Platform of Aparaaditehas.
+                    During the exhibition period, a number of lectures and workshops will be
+                    held by the participants, so check out the
+                    <a class="bold-link" href="https://www.facebook.com/events/1988561021524233">Facebook event</a>
+                    to stay updated and support our artists with a follow on social media!
+                </p>
+                <div class="pure-g logo-block">
+                    <div class="pure-u-1-2">
+                        <img src="/static/AT_logo.svg" alt="Aparaaditehas"/>
+                    </div>
+                    <div class="pure-u-1-2">
+                        <img src="/static/plantarium_logo.svg" alt="Plantarium by Jardin"/>
+                    </div>
+                </div>
+                <div class="pure-g logo-block hl-banner">
+                    <div class="pure-u-1-3">
+                        <img src="/static/HL_logo.svg" alt="Helping to Leave" />
+                    </div>
+                    <div class="pure-u-2-3">
+                        <p class="l-box">
+                            We support the organization Helping to Leave &#8212; 24/7 helpline for Ukrainians evacuating from
+                            areas of military conflict. <a class="bold-link" href="https://helpingtoleave.org/">Learn more and donate</a>
+                        </p>
+                    </div>
+                </div>
             </div>
+
+            <div class="content-block" id="participants">
+                <h2 class="content-head is-center">
+                    {{ _('Participants') }}
+                </h2>
+
+                <div class="artist1">
+                    <div class="pure-g">
+                        <div class="l-box pure-u-1-5">
+                            <img class="artistpic" src="/static/kira.png" alt="Kira">
+                        </div>
+                        <div class="l-box pure-u-3-5 artisttext">
+                            <h3 style="text-transform: uppercase;">Kira Harlašova</h3>
+                            <div class="social-icons">
+                                <a href="https://www.instagram.com/by_vaenaton/" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="mailto:vaenaton@gmail.com"><i class="fas fa-envelope"></i></a>
+                                <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
+                                <a href="" target="_blank"><i class="fab fa-behance"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="l-box pure-u-5-5">
+                            <p>
+                                Exhibition author and developer, data analyst. Self-taught artist
+                                and illustrator, publishing her artwork under the nickname (by) vaenaton.
+                                Master of Digital Humanities.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="artist1">
+                    <div class="pure-g">
+                        <div class="l-box pure-u-1-5">
+                            <img class="artistpic" src="/static/mariliis.png" alt="Mariliis">
+                        </div>
+                        <div class="l-box pure-u-3-5 artisttext">
+                            <h3 style="text-transform: uppercase;">Mariliis Kütt</h3>
+                            <div class="social-icons">
+                                <a href="https://www.instagram.com/schmariliis/" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="mailto:kytt.mariliis@gmail.com"><i class="fas fa-envelope"></i></a>
+                                <a href="https://www.linkedin.com/in/mariliis-k%C3%BCtt-b850761b4/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="l-box pure-u-5-5">
+                            <p>
+                                Exhibition organizer and developer, designer. Student at the Institute
+                                of Mathematics and Statistics @ UT, Tartu Art School graduate.
+                                Engineer in one of the Estonian unicorns.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="artist1">
+                    <div class="pure-g">
+                        <div class="l-box pure-u-1-5">
+                            <img class="artistpic" src="/static/kairo.jpg" alt="Kairo">
+                        </div>
+                        <div class="l-box pure-u-3-5 artisttext">
+                            <h3 style="text-transform: uppercase;">Kairo</h3>
+                            <div class="social-icons">
+                                <a href="https://www.instagram.com/kairo.totally.naive/" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="mailto:kairovski@gmail.com"><i class="fas fa-envelope"></i></a>
+                                <a href="https://www.facebook.com/kairothenaiveartist" target="_blank"><i class="fab fa-facebook"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="l-box pure-u-5-5">
+                            <p>
+                                Local self-taught painter whose works can be found on canvases as well
+                                as streets. Member of Tartu Artists' Union and soon-to-be city naivist.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="artist1">
+                    <div class="pure-g">
+                        <div class="l-box pure-u-1-5">
+                            <img class="artistpic" src="/static/sashami.png" alt="Sashami">
+                        </div>
+                        <div class="l-box pure-u-3-5 artisttext">
+                            <h3 style="text-transform: uppercase;">Sashami</h3>
+                            <div class="social-icons">
+                                <a href="https://www.instagram.com/sashami_art/" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="mailto:amilyakina@gmail.com"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="l-box pure-u-5-5">
+                            <p>
+                                Sashami a.k.a. Sasha Milyakina is a research fellow in Semiotics at UT
+                                and a freelance artist who captures Tartu's architectural heritage in art form.
+                                Starting from 2017, she has created calendars inspired by the city. Her clients
+                                include the University of Tartu, Tartu City Government, Tartu City Museum, Setomaa museums
+                                and many more. Sasha is from Moscow and has been living in Estonia since 2013.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="artist1">
+                    <div class="pure-g">
+                        <div class="l-box pure-u-1-5">
+                            <img class="artistpic" src="/static/kristel_olevusart.jpg" alt="Kristel">
+                        </div>
+                        <div class="l-box pure-u-3-5 artisttext">
+                            <h3 style="text-transform: uppercase;">Kristel Sergo</h3>
+                            <div class="social-icons">
+                                <a href="https://www.instagram.com/olevusart/" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="mailto:kristelse@gmail.com"><i class="fas fa-envelope"></i></a>
+                                <a href="https://www.facebook.com/olevusArt/" target="_blank"><i class="fab fa-facebook"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="l-box pure-u-5-5">
+                            <p>
+                                Also known as Olevus Art. Kristel's everyday companion on journeys and walks
+                                is her sketchbook &#8212; the place to capture her surroundings in various environments.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="artist1">
+                    <div class="pure-g">
+                        <div class="l-box pure-u-1-5">
+                            <img class="artistpic" src="/static/sievka_icon.png" alt="Yana">
+                        </div>
+                        <div class="l-box pure-u-3-5 artisttext">
+                            <h3 style="text-transform: uppercase;">Yana Sievka</h3>
+                            <div class="social-icons">
+                                <a href="https://www.instagram.com/sievka1307/" target="_blank"><i class="fab fa-instagram"></i></a>
+                                <a href="mailto:luckyjo1307@gmail.com"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="l-box pure-u-5-5">
+                            <p>
+                                Bachelor in Architecture, artist, currently works in Soulmark Tattoo & Barber.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 {% endblock %}

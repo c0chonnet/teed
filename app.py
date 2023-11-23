@@ -86,12 +86,12 @@ def before_request():
 
 @multilingual.route('/')
 def index():
-    return render_template('index.html', title=_('Home test'))
+    return render_template('index.html', title=_('Interactive exhibition | Home page'))
 
 
 @multilingual.route('/visit')
 def visit():
-    return render_template('visit.html', title=_('Exhibition'))
+    return render_template('visit.html', title=_('Visit'))
 
 @app.route('/end',methods=['GET'])
 def end():
