@@ -175,6 +175,7 @@ def end():
                            lang=g.lang_code)
 @app.route('/visited', methods=['POST'])
 def visited():
+    g.lang_code = request.accept_languages.best_match(app.config['LANGUAGES'])
     ids=None
 
     if request.form.get('jsondata'):
@@ -183,7 +184,7 @@ def visited():
 
     if 'end' in request.form and request.form['end'] == 'true':
         if ids is None or len(ids) == 1:
-            return redirect(url_for('end', visit='none'))
+            return redirect(url_for('multilingual.end', visit='none'))
         else:
             with Tunneling() as t:
                 with t.engine.connect() as connection:
@@ -203,7 +204,7 @@ def visited():
                         query = query.bindparams(visit=visit, artwork=id)
                         connection.execute(query)
                     connection.commit()
-            return redirect(url_for('end', visit=cipher_suite.encrypt(bytes(str(visit), 'utf-8'))))
+            return redirect(url_for('multilingual.end', visit=cipher_suite.encrypt(bytes(str(visit), 'utf-8'))))
     return ''
 
 @multilingual.route('/arscene')
