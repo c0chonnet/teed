@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-09-25 00:07+0300\n"
-"PO-Revision-Date: 2023-09-25 00:08+0300\n"
+"POT-Creation-Date: 2023-11-24 00:38+0200\n"
+"PO-Revision-Date: 2023-11-24 00:38+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: et\n"
 "Language-Team: et <LL@li.org>\n"
@@ -18,33 +18,217 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app.py:36
-msgid "Home test"
-msgstr "Kodu test"
+#: app.py:89
+msgid "Interactive exhibition | Home page"
+msgstr "Interaktiivne näitus | Avaleht"
 
-#: app.py:41
-msgid "Exhibition"
-msgstr "Näitus"
+#: app.py:94
+msgid "Visit"
+msgstr "Külastus"
 
-#: templates/base.html:25 templates/index.html:41
+#: templates/base.html:26 templates/index.html:93
 msgid "About"
 msgstr "Näitusest"
 
-#: templates/index.html:8
-msgid ""
-"Interactive exhibition about Tartu. Read the instructions in the gallery "
-"or below and press \"Start\""
-msgstr "Tartu linna teemaline interaktiivne näitus. Loe juhiseid galeriis või kerides allapoole, seejärel vajuta nuppu \"Alusta\""
+#: templates/end.html:10
+msgid "End of the visit"
+msgstr "Külastuse lõpp"
 
-#: templates/index.html:12
+#: templates/end.html:17
+msgid ""
+"You had no interactions during your visit! Please read the instructions "
+"and try again."
+msgstr "Sa ei suhelnud külastuse jooksul ühegi teosega! Loe juhiseid ja proovi uuesti: "
+
+#: templates/end.html:19
+msgid "Try again"
+msgstr "Proovi uuesti"
+
+#: templates/end.html:24
+msgid "Here is your route! The walk along this"
+msgstr "Siin on sinu teekond! Kõndides mööda seda"
+
+#: templates/end.html:24
+msgid "km route will take about"
+msgstr "km pikkust rada, läbid teekonna umbes"
+
+#: templates/end.html:24
+msgid ""
+"h. Make a screenshot to revisit it in a real town and don't forget to "
+"share it in social media with hashtag #näitusteed!"
+msgstr "tunniga. Salvesta vaade ekraanitõmmisena, et saaksid läbida sama tee linnaruumis. Jaga ekraanitõmmist ka sotsiaalmeedias, kasutades postituses hashtagi #näitusteed!"
+
+#: templates/end.html:25
+msgid "You can always open this page via this link:"
+msgstr "Lehekülje saad alati uuesti avada järgneva veebiaadressi kaudu:"
+
+#: templates/end.html:33
+msgid ""
+"Learn more about authors and support them by subscribing in social "
+"networks:"
+msgstr "Saa kunstnikega lähemalt tuttavaks ning hakka jälgijaks sotsiaalmeedias:"
+
+#: templates/end.html:35
+msgid "Learn more"
+msgstr "Loe lähemalt"
+
+#: templates/index.html:9
+msgid "An interactive exhibition about Tartu"
+msgstr "Tartu teemaline interaktiivne näitus"
+
+#: templates/index.html:11
+msgid "Read the instructions below and press <i>Start</i>"
+msgstr "Loe allpool toodud juhiseid ning vajuta <i>Alusta</i>"
+
+#: templates/index.html:15 templates/index.html:84
 msgid "Start"
 msgstr "Alusta"
 
-#: templates/index.html:20
-msgid "How to interact with artworks"
-msgstr "Kuidas teostega suhelda"
+#: templates/index.html:26
+msgid "Instructions"
+msgstr "Juhised"
 
-#: templates/index.html:49
+#: templates/index.html:33
+msgid ""
+"Press <i>Start</i> and allow camera access in your browser. This is necessary "
+"for interacting with the artwork; the site does not collect any personal "
+"data."
+msgstr "Vajuta nuppu <i>Alusta</i> ning luba oma veebibrauseris ligipääs kaamerale. See on vajalik teostega interaktiivselt suhtlemiseks; veebisait ei kogu külastaja isikuandmeid."
+
+#: templates/index.html:39
+msgid ""
+"When the loading has stopped, and you see the scanner screen, the AR "
+"engine is ready for work. Loading can take up to one minute."
+msgstr "Kui laadimine on lõppenud ja näed ekraanil skaneerimise animatsiooni, on liitreaalsuse mootor tööks valmis. Laadimine võib kuni minuti aega võtta."
+
+#: templates/index.html:45
+msgid ""
+"Select an artwork and move your camera towards it to view the "
+"augmentation. Each painting has one, and augmented sketches in the "
+"sketchbooks are marked with a special sticker."
+msgstr "Vali sobiv kunstiteos ja suuna oma kaamera selle poole, et näha augmentatsiooni. Igal maalil ja joonistusel on küljes nö \"liitreaalne lisa\", visandiraamatutes on sellise lisaga tööd märgistatud spetsiaalse kleebisega."
+
+#: templates/index.html:51
+msgid ""
+"Scan the artworks using a mobile phone. Do not move the camera from one "
+"work to another too fast, wait for the scanner to appear again. "
+"Augmentations can change with delay, depending on the smartphone's model "
+"and the browser being used."
+msgstr "Kasuta kunstiteoste skaneerimiseks nutitelefoni. Ära liiguta kaamerat liiga kiiresti ühelt teoselt teisele &#8212; oota, kuni skaneerimise vaade ilmub uuesti ekraanile. Animatsioonid võivad muutuda viivitusega, olenevalt nutiseadme mudelist ja kasutatavast veebibrauserist."
+
+#: templates/index.html:57
+msgid ""
+"If the scanning animation disappeared but an augmentation did not appear,"
+" refresh the page and start again. It is recommended to interact with "
+"5-10 works per visit, this way the AR engine can work better and the "
+"resulting routes are of reasonable length."
+msgstr "Juhul, kui skaneerimise animatsioon kadus ekraanilt, kuid teose augmentatsioon ekraanile ei ilmunud, värskenda veebilehte ja alusta uuesti. Soovitame külastuse jooksul suhelda 5-10 teosega, nii saab liitreaalsuse mootor oma tööd paremini teha ning külastuse lõpus kuvatav teekond on mõistliku pikkusega."
+
+#: templates/index.html:63
+msgid ""
+"We would appreciate if you could post screenshots or screen videos of "
+"artwork animations with the hashtag"
+msgstr "Oleme väga tänulikud, kui teete külastuse jooksul ekraanitõmmiseid või -salvestusi ning jagate neid sotsiaalmeedias hashtagiga"
+
+#: templates/index.html:63
+msgid ""
+" to social media! After visiting all the interesting works, press <i>End "
+"visit</i>."
+msgstr "! Kui kõik huvipakkuvad teosed on külastatud, vajuta nuppu <i>Lõpeta külastus</i>."
+
+#: templates/index.html:69
+msgid ""
+"You will be redirected to the page of your exhibition route, which is "
+"mapped to the city. It will contain up to 10 points from your visit. If "
+"you want to get a route with certain artworks, start a new visit and "
+"interact only with needed pieces."
+msgstr "Sind suunatakse edasi lehele, kus näed külastatud teostest koosnevat teekonda, mis on kantud linna kaardile. Teekond sisaldab kuni kümmet punkti sinu külastusest. Kui soovid tulemuseks rada, mis koosneb kindlatest teostest, alusta külastust uuesti ja suhtle ainult soovitud teostega."
+
+#: templates/index.html:75
+msgid ""
+"Use the route to take a walk through the city and enjoy the beauty of "
+"Tartu &#8212; the European Capital of Culture 2024! Don't forget to check"
+" out Plantarium to buy stickers from our artists."
+msgstr "Kasuta loodud teekonda, et jalutada mööda linna ja nautida Tartu, 2024. aasta Euroopa kultuuripealinna ilu! Ära unusta läbi astumast Plantariumist, kust saad lisaks laiale taimevalikule soetada ka näitusel osalevate kunstnike kleebiseid."
+
+#: templates/index.html:81
+msgid "Enjoy the visit!"
+msgstr "Head külastust!"
+
+#: templates/index.html:96
+msgid ""
+"The exhibition was created by local developers and artists with the "
+"support of Plantarium by Jardin and the Open Cultural Platform of "
+"Aparaaditehas. During the exhibition period, a number of lectures and "
+"workshops will be held by the participants, so check out the"
+msgstr "Näituse koostasid kohalikud arendajad ning kunstnikud Plantarium by Jardin-i ja Aparaaditehase avatud kultuuriplatvormi toel. Näituse perioodil on korraldajatel kavas läbi viia mitmeid loenguid ja töötubasid, seega külasta"
+
+#: templates/index.html:96
+msgid "Facebook event"
+msgstr "Facebooki üritust"
+
+#: templates/index.html:96
+msgid " to stay updated and support our artists with a follow on social media!"
+msgstr ", et püsida kursis kõige ajakohasema infoga, ning toeta kunstnikke, liitudes nende sotsiaalmeedia jälgijaskonnaga!"
+
+#: templates/index.html:112
+msgid ""
+"We support the organization Helping to Leave &#8212; 24/7 helpline for "
+"Ukrainians evacuating from areas of military conflict."
+msgstr "Toetame organisatsiooni Helping to Leave &#8212; 24/7 abiliin ukrainlastele sõjalise konflikti piirkondadest evakueerumiseks."
+
+#: templates/index.html:112
+msgid "Learn more and donate"
+msgstr "Loe lähemalt ja anneta"
+
+#: templates/index.html:120
 msgid "Participants"
 msgstr "Osalejad"
+
+#: templates/index.html:141
+msgid ""
+"Exhibition author and developer, data analyst. Self-taught artist and "
+"illustrator, publishing her artwork under the nickname (by) vaenaton. "
+"Master of Digital Humanities."
+msgstr "Näituse idee autor ja arendaja, andmeanalüütik. Iseõppinud kunstnik ja illustraator, avaldades oma töid nime all (by) vaenaton. Digitaalsete humanitaarteaduste magister."
+
+#: templates/index.html:164
+msgid ""
+"Exhibition organizer and developer, designer. Student at the Institute of"
+" Mathematics and Statistics @ UT, Tartu Art School graduate. Engineer in "
+"one of the Estonian unicorns."
+msgstr "Näituse korraldaja ja arendaja, disainer. TÜ matemaatika ja statistika instituudi tudeng, Tartu Kunstikooli vilistlane. Töötab insenerina ühes Eesti ükssarvikus."
+
+#: templates/index.html:187
+msgid ""
+"Local self-taught painter whose works can be found on canvases as well as"
+" streets. Member of Tartu Artists' Union and soon-to-be city naivist."
+msgstr "Kohalik iseõppijast maalikunstnik, kelle töid leiab nii lõuendilt kui tänavalt. Tartu Kunstnike Liidu liige ja tulevane linnanaivist."
+
+#: templates/index.html:209
+msgid ""
+"Sashami a.k.a. Sasha Milyakina is a research fellow in Semiotics at UT "
+"and a freelance artist who captures Tartu's architectural heritage in art"
+" form. Starting from 2017, she has created calendars inspired by the "
+"city. Her clients include the University of Tartu, Tartu City Government,"
+" Tartu City Museum, Setomaa museums and many more. Sasha is from Moscow "
+"and has been living in Estonia since 2013."
+msgstr "Sashami ehk Sasha Milyakina on TÜ semiootika teadur ja vabakutseline kunstnik, kes tegeleb Tartu arhitektuurilise pärandi jäädvustamisega kujutava kunsti vormis. Alates 2017. aastast on ta loonud linnast inspireeritud kalendreid. Tema klientide hulka kuuluvad Tartu Ülikool, Tartu Linnavalitsus, Tartu Linnamuuseum, Setomaa Muuseumid ja paljud teised. Sasha on pärit Moskvast ja elab Eestis 2013. aastast alates."
+
+#: templates/index.html:232
+msgid ""
+"Also known as Olevus Art. Kristel's everyday companion on journeys and "
+"walks is her sketchbook &#8212; the place to capture her surroundings in "
+"various environments."
+msgstr "Tuntud ka kui Olevus Art. Kristeli igapäevaseks kaaslaseks rännakutel ja jalutuskäikudel on visandiraamat, kuhu joonistab enda ümber olevat erinevates keskkondades."
+
+#: templates/index.html:254
+msgid ""
+"Bachelor in Architecture, artist, currently works in Soulmark Tattoo & "
+"Barber."
+msgstr "Arhitektuuri bakalaureus, kunstnik, hetkel tätoveerija salongis Soulmark Tattoo & Barber."
+
+#: templates/visit.html:10
+msgid "End visit"
+msgstr "Lõpeta külastus"
 

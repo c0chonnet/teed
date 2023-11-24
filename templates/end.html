@@ -4,26 +4,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static',  filename='fav.png')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static',  filename='favicon.ico')}}">
-    <title>End of the visit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>TEED</title>
 </head>
 <body>
+    <div class="header">
+        <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+            <a class="pure-menu-heading" href="{{ url_for('multilingual.index') }}">Teed</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item"><a href="{{ url_for(request.endpoint, lang_code='et', visit=visit) }}" class="pure-menu-link">EST</a></li>
+                <li class="pure-menu-item"><a href="{{ url_for(request.endpoint, lang_code='en', visit=visit) }}" class="pure-menu-link">ENG</a></li>
+                <li class="pure-menu-item"><a href="{{ url_for(request.endpoint, lang_code='ru', visit=visit) }}" class="pure-menu-link">RUS</a></li>
+                <li class="pure-menu-item"><a href="{{ url_for('multilingual.index') }}#about" class="pure-menu-link about">{{ _('About') }}</a></li>
+            </ul>
+        </div>
+    </div>
 
-<div class="is-center content">
+
+<div class="is-center end-content">
 {% if iframe == 'none'%}
 
-    <p>You had no interactions during your visit! Please read the instructions and try again: </p>
+    <p>{{ _('You had no interactions during your visit! Please read the instructions and try again.') }}</p>
     <form action="/">
-                <button type="submit" class="pure-button">Try again</button>
+                <button type="submit" class="pure-button">{{ _('Try again') }}</button>
     </form>
 
 {% else %}
 
-    <p>Here is your route! The walk along this {{distance}} km route will take about {{duration}} h. Make a screenshot to revisit it in a real town and don't forget
-    to share it in social media with hashtag #näitusteed </p>
-    <p>You can always open this page via this link: teed.app/end?visit={{ visit }} </p>
+    <p>{{ _('Here is your route! The walk along this') }} {{distance}} {{ _('km route will take about') }} {{duration}} {{ _('h. Make a screenshot to revisit it in a real town and don\'t forget to share it in social media with hashtag #näitusteed!') }}</p>
+    <p class="route-url">{{ _('You can always open this page via this link:') }} teed.app/{{ lang }}/end?visit={{ visit }} </p>
 
 <div class="route-map">
 
@@ -31,11 +44,15 @@
 
 </div>
 
-    <p>Learn more about authors and support them subscribing in social networks!</p>
-<form action="/#about">
-                <button type="submit" class="pure-button">Learn more</button>
-</form>
-
+    <p>{{ _('Learn more about authors and support them by subscribing in social networks:') }}</p>
+    <a href="{{ url_for('multilingual.index') }}#about" class="pure-button">
+        {{ _('Learn more') }}
+    </a>
 {% endif %}
+
 </div>
+    <div class="footer l-box is-center">
+        TEED app 1.0.0
+    </div>
 </body>
+</html>

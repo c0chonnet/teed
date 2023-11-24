@@ -52,8 +52,13 @@ iframe {
     background: white;
 }
 .content {
-    padding: 20px 30px 75px;
+    padding: 50px 30px 75px;
 }
+
+.end-content {
+    padding: 90px 30px 75px;
+}
+
 .content-head {
     font-weight: 700;
     font-size: 2em;
@@ -81,9 +86,8 @@ a.pure-button {
 .bold-link {
     color: black;
     font-weight: 600;
-    text-decoration: underline;
-    text-decoration-color: #dfd821;
-    text-decoration-thickness: 3px;
+    background-color: #dfd821;
+    text-decoration: none;
 }
 
 
@@ -171,6 +175,16 @@ a.pure-button {
 #instructions ol {
     margin-top: 0;
     margin-left: -10px;
+}
+#instructions > div {
+    margin-left: -20px;
+}
+.step-img {
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 30px;
+     vertical-align: middle;
+     object-fit: scale-down;
 }
 .hashtag-span {
     background-color: #dfd821;
@@ -318,6 +332,12 @@ a-scene {
 
     .splash-head {
         font-size: 400%;
+    }
+
+    .route-url {
+        position:relative;
+        width:150px;
+        overflow-wrap:anywhere;
     }
 
     /* We remove the border-separator assigned to .l-box-lrg */
