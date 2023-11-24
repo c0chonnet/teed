@@ -180,9 +180,10 @@ a.pure-button {
     margin-left: -20px;
 }
 .step-img {
-    width: 300px;
+    width: 200px;
     margin: 0 auto;
     margin-top: 30px;
+    padding:20px;
      vertical-align: middle;
      object-fit: scale-down;
 }
@@ -337,7 +338,6 @@ a-scene {
     .route-url {
         position:relative;
         width:150px;
-        overflow-wrap:anywhere;
     }
 
     /* We remove the border-separator assigned to .l-box-lrg */

@@ -221,7 +221,7 @@ msgid ""
 "Also known as Olevus Art. Kristel's everyday companion on journeys and "
 "walks is her sketchbook &#8212; the place to capture her surroundings in "
 "various environments."
-msgstr "Также известен, как Olevus Art. Работы этой художницы-самоучки вы можете увидеть и на холстах, и на улицах. Член Союза художников Тарту, в будущем — художница-наивист Тарту."
+msgstr "Также известна как Olevus Art. Ее ежедневным спутником является скетчбук, в котором она рисует то, что ее окружает."
 
 #: templates/index.html:254
 msgid ""
