@@ -104,7 +104,10 @@ def end():
         distance = 'none'
 
     else:
-
+        if float(visit).is_integer():
+            visit=visit
+        else:
+            visit=visit=int(cipher_suite.decrypt(visit))
         with Tunneling() as t:
             with t.engine.connect() as connection:
                 visitartworks = connection.execute(sql.text('''
@@ -112,7 +115,7 @@ def end():
                 FROM artworks JOIN visits_artworks ON visits_artworks.artwork_id = artworks.id 
                 AND visits_artworks.visit_id = :visit
                 JOIN artists ON artworks.artist_id = artists.id 
-                ORDER BY random() limit 10;''').bindparams(visit=int(cipher_suite.decrypt(visit))))
+                ORDER BY random() limit 10;''').bindparams(visit=visit))
         
         min_lat = 58.2
         min_lon = 26.5
